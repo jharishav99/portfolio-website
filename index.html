@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body class="bg-canvas">
     <!-- Navigation -->
     <nav class="nav-container">
       <div class="nav-content">
@@ -98,9 +98,9 @@
                 about.txt
               </div>
             </div>
-            <div class="glass-card">
-              <div class="card-content">
-                <p class="about-text">
+            <div class="glass-card-about-me">
+              <div class="card-content-about-me">
+                <p class="about-text-about-me">
                   Recent B.Tech graduate Major in Computer Science & Engineering
                   and Minor in Financial Economics using Data Analytics<br />
                   <br />
@@ -109,32 +109,6 @@
                   <br /><br />Effective communicator & fast learner, driven to
                   contribute to high-impact projects.
                 </p>
-
-                <!-- <div class="skills-grid">
-                  <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                      <span class="skill-tag">Java</span>
-                      <span class="skill-tag">C++</span>
-                      <span class="skill-tag">Python</span>
-                    </div>
-                  </div>
-                  <div class="skill-category">
-                    <h3>Technologies</h3>
-                    <div class="skill-tags">
-                      <span class="skill-tag">MERN Stack</span>
-                      <span class="skill-tag">AI/ML</span>
-                      <span class="skill-tag">OpenCV</span>
-                    </div>
-                  </div>
-                  <div class="skill-category">
-                    <h3>Specializations</h3>
-                    <div class="skill-tags">
-                      <span class="skill-tag">RNN</span>
-                      <span class="skill-tag">CNN</span>
-                      <span class="skill-tag">GRU</span>
-                    </div>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -358,7 +332,7 @@
               </div>
               <div class="project-card glass-card">
                 <div class="project-header">
-                  <h3>Word2Vec – Odd One Out</h3>
+                  <h3>Word2Vec</h3>
                   <div class="project-tech">
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">NLP</span>
@@ -386,16 +360,15 @@
               </div>
               <div class="project-card glass-card">
                 <div class="project-header">
-                  <h3>Air Pollution Prediction</h3>
+                  <h3>Snapchat filter</h3>
                   <div class="project-tech">
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">ML</span>
-                    <span class="tech-tag">Environmental Data</span>
+                    <span class="tech-tag">AI</span>
                   </div>
                 </div>
                 <p>
-                  Predictive model forecasting air quality levels using
-                  environmental sensors and meteorological data.
+                 AI/ML-powered Snapchat filter! It adds a mustache and goggles to any face using advanced facial landmark detection.
                 </p>
               </div>
               <div class="project-card glass-card">
@@ -411,6 +384,35 @@
                   Biometric identification system using K-nearest neighbors
                   algorithm for accurate face detection and recognition.
                 </p>
+              </div>
+              <div class="project-card glass-card">
+                <div class="project-header">
+                  <h3>Diary style portfolio website</h3>
+                  <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                   
+                  </div>
+                </div>
+                <p>
+                  This resume website is built using pure HTML and CSS with a nostalgic diary-style design.
+                </p>
+                <a href="https://jharishav99.github.io/resume_website/">Preview</a>
+              </div>
+              <div class="project-card glass-card">
+                <div class="project-header">
+                  <h3>Studyz</h3>
+                  <div class="project-tech">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JS</span>
+                   
+                  </div>
+                </div>
+                <p>
+                  Studyz is a modern and minimal landing page crafted for educational platforms.
+                </p>
+               <a href="https://studyz-ten.vercel.app/">Preview</a>
               </div>
             </div>
           </div>
@@ -445,14 +447,7 @@
                     <h3>Study in India Scholarship</h3>
                     <p>Got Full Scholarship from Indian Government under Study in India (SII) for B.TECH CSE at KIIT University.</p>
                   </div>
-               <!--    <div class="honor-item glass-card">
-                    <h3>IEEE Paper Publication</h3>
-                    <p>Published 2 research papers in IEEE Xplore</p>
-                  </div>
-                  <div class="honor-item glass-card">
-                    <h3>National Tech Conclave Speaker</h3>
-                    <p>Presented at 2 national-level technical conclaves</p>
-                  </div> -->
+               
                 </div>
               </div>
             </div>
@@ -538,10 +533,10 @@
                     >Instagram</a
                   >
                   <a
-                    href="https://leetcode.com/u/jharishav99/"
+                    href="https://www.facebook.com/jharishav99/"
                     target="_blank"
                     class="social-link"
-                    >LeetCode</a
+                    >Facebook</a
                   >
                 </div>
               </div>
@@ -627,6 +622,14 @@
       </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="app.js">
+      const navToggle = document.querySelector('.nav-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+
+  navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    navToggle.classList.toggle('open');
+  });
+    </script>
   </body>
 </html>
