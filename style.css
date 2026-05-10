@@ -1438,21 +1438,56 @@ footer .footer-text {
 
 @media (max-width: 900px) {
   .comedy-champion-card {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center; /* Centers all headings and descriptions */
-    padding: 2rem 1.5rem; /* Reduces padding for smaller screens */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centers items horizontally */
+    justify-content: center !important;
+    text-align: center !important; /* Centers all text inside */
+    padding: 2rem 1.5rem !important;
   }
+  .champ-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the trophy, badges, and stats */
+  }
+
   .champ-badge-row {
-    justify-content: center; /* Centers the tags/badges */
+    justify-content: center !important; /* Centers the red/gold tags */
+    width: 100%;
   }
+
+  .champ-stats {
+    display: grid !important;
+    grid-template-columns: 1fr; /* Stacks stats for better mobile centering */
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 1.5rem !important; /* Centers the whole stats box */
+    padding: 1.5rem !important;
+    justify-items: center;
+  }
+
   .champ-right {
+    order: -1; /* Keeps photo at the top */
+    width: 100%;
+    display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
   }
+
   .champ-img {
+    width: 100%;
+    max-width: 400px; /* Adjust size as needed */
     height: auto;
-    max-width: 100%;
-    margin-inline: auto;
+    margin: 0 auto !important;
+    display: block;
+  }
+
+  .champ-yt-note {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto !important;
   }
 }
 @media (max-width: 600px) {
