@@ -1,7 +1,3 @@
-That new design looks fantastic—the mountain backdrop and the clean card layout really give it a premium feel.
-
-Since your website is now focused on your identity as a .NET Full Stack Developer with a clear aesthetic, here is a professional README.md file tailored for your repository. I've included sections that highlight your technical stack and the specific features of this new design.
-
 🏔️ Rishav Jha | .NET Full Stack Developer Portfolio
 Welcome to the repository for my personal portfolio website. This version features a modern, sleek design inspired by the landscapes of Nepal, blending professional glassmorphism with a clean, interactive user interface.
 
