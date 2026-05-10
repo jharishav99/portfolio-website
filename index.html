@@ -1,208 +1,900 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rishav Jha </title>
-    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .comedy-grid-2x2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .comedy-grid-cell {
+        aspect-ratio: 4/3;
+        overflow: hidden;
+        border-radius: 8px;
+        position: relative;
+      }
+      .comedy-grid-cell img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        display: block;
+      }
+      .comedy-grid-cell:hover img {
+        transform: scale(1.04);
+      }
+    </style>
   </head>
-  <body class="bg-canvas">
-    <!-- Navigation -->
-    <nav class="nav-container">
-      <div class="nav-content">
-        <div class="nav-logo">
-          <span class="terminal-prompt">~/rishav</span
-          ><span class="blinking-cursor">_</span>
-        </div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">> home</a></li>
-          <li><a href="#about" class="nav-link">> about</a></li>
-          <li><a href="#education" class="nav-link">> education</a></li>
-          <li><a href="#publications" class="nav-link">> publications</a></li>
-          <li><a href="#projects" class="nav-link">> projects</a></li>
-          <li><a href="#contact" class="nav-link">> contact</a></li>
-        </ul>
-        <div class="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
+  <body>
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo">Rishav <span>Jha</span></div>
+      <button class="nav-toggle" id="navToggle">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#publications">Research</a></li>
+        <li><a href="#certificates">Certs</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
+    <div class="page-flag-strip top"></div>
+    <div class="page-flag-strip bottom"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-      <div class="container">
-        <div class="terminal-window">
-          <div class="terminal-header-bar">
-            <div class="terminal-buttons">
-              <span class="btn-close"></span>
-              <span class="btn-minimize"></span>
-              <span class="btn-maximize"></span>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-sky"></div>
+      <div class="stars-layer"></div>
+      <div class="aurora"></div>
+      <canvas id="snowCanvas"></canvas>
+
+      <!-- Mountains -->
+      <svg
+        class="mountain-layer"
+        viewBox="0 0 1440 500"
+        preserveAspectRatio="xMidYMax slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="mtnFar" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #2a3d55; stop-opacity: 0.5" />
+            <stop
+              offset="100%"
+              style="stop-color: #0e1520; stop-opacity: 0.9"
+            />
+          </linearGradient>
+          <linearGradient id="mtnMid" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #3d5068; stop-opacity: 0.7" />
+            <stop
+              offset="100%"
+              style="stop-color: #101820; stop-opacity: 0.95"
+            />
+          </linearGradient>
+          <linearGradient id="mtnEverest" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #f0ede8; stop-opacity: 0.95" />
+            <stop
+              offset="25%"
+              style="stop-color: #c8d8e8; stop-opacity: 0.85"
+            />
+            <stop offset="60%" style="stop-color: #5a7090; stop-opacity: 0.7" />
+            <stop
+              offset="100%"
+              style="stop-color: #1a2535; stop-opacity: 0.9"
+            />
+          </linearGradient>
+          <linearGradient id="snowCap" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #ffffff; stop-opacity: 1" />
+            <stop
+              offset="100%"
+              style="stop-color: #d0dce8; stop-opacity: 0.6"
+            />
+          </linearGradient>
+          <linearGradient id="greenValley" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #2d5a27; stop-opacity: 0.9" />
+            <stop offset="100%" style="stop-color: #0e1a0a; stop-opacity: 1" />
+          </linearGradient>
+          <linearGradient id="templeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: #1a1205; stop-opacity: 1" />
+            <stop offset="100%" style="stop-color: #0a0804; stop-opacity: 1" />
+          </linearGradient>
+        </defs>
+        <polygon
+          points="0,500 150,240 280,300 420,200 560,270 700,190 840,250 980,180 1100,230 1250,170 1380,210 1440,190 1440,500"
+          fill="url(#mtnFar)"
+        />
+        <polygon
+          points="0,500 80,310 200,370 340,280 460,340 600,260 740,320 880,250 1000,310 1150,240 1280,290 1440,260 1440,500"
+          fill="url(#mtnMid)"
+        />
+        <polygon
+          points="520,500 640,200 670,160 700,100 730,75 760,60 790,75 820,110 850,160 880,210 1000,500"
+          fill="url(#mtnEverest)"
+        />
+        <polygon
+          points="730,75 760,60 790,75 810,100 780,90 760,70 740,90 710,105"
+          fill="url(#snowCap)"
+        />
+        <polygon
+          points="670,160 695,145 720,160 700,175"
+          fill="rgba(240,237,232,0.6)"
+        />
+        <polygon
+          points="810,165 835,150 860,170 840,180"
+          fill="rgba(240,237,232,0.5)"
+        />
+        <polygon
+          points="380,500 480,240 510,210 540,230 570,260 650,500"
+          fill="rgba(50,65,85,0.7)"
+        />
+        <polygon
+          points="510,210 540,220 530,235 515,225"
+          fill="rgba(220,230,240,0.6)"
+        />
+        <polygon
+          points="900,500 1000,250 1030,220 1060,240 1090,270 1180,500"
+          fill="rgba(50,65,85,0.65)"
+        />
+        <polygon
+          points="1030,220 1060,230 1050,245 1035,235"
+          fill="rgba(210,220,235,0.5)"
+        />
+        <polygon
+          points="0,500 0,420 100,400 200,430 350,390 450,420 600,380 720,410 850,395 950,415 1100,390 1250,410 1440,395 1440,500"
+          fill="url(#greenValley)"
+        />
+        <polygon points="40,420 55,380 70,420" fill="rgba(20,40,15,0.9)" />
+        <polygon points="65,425 80,382 95,425" fill="rgba(20,40,15,0.85)" />
+        <polygon points="90,430 107,385 124,430" fill="rgba(20,40,15,0.9)" />
+        <polygon points="120,422 138,378 156,422" fill="rgba(25,45,18,0.85)" />
+        <polygon points="155,428 174,383 193,428" fill="rgba(20,40,15,0.9)" />
+        <polygon points="185,420 205,375 225,420" fill="rgba(20,40,15,0.85)" />
+        <polygon
+          points="1250,415 1268,372 1286,415"
+          fill="rgba(20,40,15,0.9)"
+        />
+        <polygon
+          points="1280,420 1299,376 1318,420"
+          fill="rgba(20,40,15,0.85)"
+        />
+        <polygon
+          points="1310,418 1330,373 1350,418"
+          fill="rgba(20,40,15,0.9)"
+        />
+        <polygon
+          points="1355,422 1375,377 1395,422"
+          fill="rgba(25,45,18,0.85)"
+        />
+        <polygon
+          points="1390,420 1411,374 1432,420"
+          fill="rgba(20,40,15,0.9)"
+        />
+        <rect x="265" y="430" width="70" height="60" fill="url(#templeGrad)" />
+        <polygon points="250,430 300,415 350,430" fill="rgba(10,8,4,0.95)" />
+        <polygon points="260,415 300,402 340,415" fill="rgba(12,9,5,0.95)" />
+        <polygon points="270,402 300,392 330,402" fill="rgba(14,10,6,0.9)" />
+        <polygon points="278,392 300,385 322,392" fill="rgba(15,11,6,0.95)" />
+        <polygon points="296,385 300,370 304,385" fill="rgba(212,160,23,0.6)" />
+        <rect
+          x="290"
+          y="450"
+          width="20"
+          height="40"
+          rx="2"
+          fill="rgba(5,3,2,1)"
+        />
+        <circle cx="278" cy="442" r="4" fill="rgba(232,130,12,0.3)" />
+        <circle cx="322" cy="442" r="4" fill="rgba(232,130,12,0.3)" />
+        <rect x="1100" y="435" width="55" height="55" fill="url(#templeGrad)" />
+        <polygon points="1088,435 1127,422 1166,435" fill="rgba(10,8,4,0.95)" />
+        <polygon points="1096,422 1127,411 1158,422" fill="rgba(12,9,5,0.95)" />
+        <polygon points="1106,411 1127,403 1148,411" fill="rgba(14,10,6,0.9)" />
+        <polygon points="1114,403 1127,396 1140,403" fill="rgba(15,11,6,0.9)" />
+        <polygon
+          points="1124,396 1127,383 1130,396"
+          fill="rgba(212,160,23,0.6)"
+        />
+        <rect
+          x="1118"
+          y="454"
+          width="18"
+          height="36"
+          rx="2"
+          fill="rgba(5,3,2,1)"
+        />
+        <ellipse cx="1000" cy="455" rx="35" ry="22" fill="rgba(12,9,5,0.95)" />
+        <rect
+          x="993"
+          y="433"
+          width="14"
+          height="22"
+          fill="rgba(14,10,6,0.95)"
+        />
+        <polygon points="993,433 1000,418 1007,433" fill="rgba(15,11,6,0.9)" />
+        <polygon
+          points="997,418 1000,410 1003,418"
+          fill="rgba(212,160,23,0.5)"
+        />
+        <ellipse cx="995" cy="448" rx="4" ry="3" fill="rgba(232,130,12,0.2)" />
+        <ellipse cx="1005" cy="448" rx="4" ry="3" fill="rgba(232,130,12,0.2)" />
+        <g fill="rgba(8,5,3,0.95)" transform="translate(450,430)">
+          <ellipse cx="0" cy="0" rx="28" ry="15" />
+          <ellipse cx="25" cy="-8" rx="12" ry="9" />
+          <path
+            d="M28,-14 Q22,-24 18,-20"
+            stroke="rgba(8,5,3,0.95)"
+            stroke-width="2.5"
+            fill="none"
+          />
+          <path
+            d="M32,-15 Q38,-24 42,-20"
+            stroke="rgba(8,5,3,0.95)"
+            stroke-width="2.5"
+            fill="none"
+          />
+          <rect x="-20" y="10" width="7" height="20" rx="2" />
+          <rect x="-6" y="10" width="7" height="18" rx="2" />
+          <rect x="8" y="10" width="7" height="18" rx="2" />
+          <rect x="20" y="10" width="7" height="20" rx="2" />
+          <path
+            d="M-28,0 Q-35,8 -28,12"
+            stroke="rgba(8,5,3,0.9)"
+            stroke-width="3"
+            fill="none"
+          />
+          <path
+            d="M-25,5 Q-33,14 -24,18"
+            stroke="rgba(8,5,3,0.9)"
+            stroke-width="3"
+            fill="none"
+          />
+        </g>
+        <g transform="translate(600,490)" opacity="0.6">
+          <ellipse cx="0" cy="0" rx="15" ry="8" fill="rgba(155,27,48,0.5)" />
+          <path d="M-8,-4 Q0,-12 8,-4" fill="rgba(180,50,70,0.5)" />
+          <path d="M-12,-2 Q-4,-10 0,-6" fill="rgba(170,45,65,0.4)" />
+          <path d="M12,-2 Q4,-10 0,-6" fill="rgba(170,45,65,0.4)" />
+        </g>
+        <!-- BUDDHA STATUE HANGING FROM TREE -->
+        <g transform="translate(1300,200)" opacity="0.85">
+          <!-- Tree branch -->
+          <path
+            d="M-40,-60 Q-20,-70 0,-75 Q20,-70 40,-60"
+            stroke="rgba(80,60,40,0.8)"
+            stroke-width="4"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            d="M-35,-65 Q-15,-73 0,-78 Q15,-73 35,-65"
+            stroke="rgba(100,75,50,0.6)"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <!-- Tree leaves -->
+          <circle cx="-50" cy="-70" r="18" fill="rgba(60,100,40,0.4)" />
+          <circle cx="-40" cy="-85" r="15" fill="rgba(70,110,50,0.4)" />
+          <circle cx="-25" cy="-95" r="16" fill="rgba(65,105,45,0.4)" />
+          <circle cx="0" cy="-100" r="18" fill="rgba(70,110,50,0.5)" />
+          <circle cx="25" cy="-95" r="16" fill="rgba(65,105,45,0.4)" />
+          <circle cx="40" cy="-85" r="15" fill="rgba(70,110,50,0.4)" />
+          <circle cx="50" cy="-70" r="18" fill="rgba(60,100,40,0.4)" />
+          <!-- Rope -->
+          <line
+            x1="0"
+            y1="-75"
+            x2="-3"
+            y2="30"
+            stroke="rgba(150,120,80,0.7)"
+            stroke-width="1.5"
+            stroke-dasharray="2,2"
+          />
+          <line
+            x1="0"
+            y1="-75"
+            x2="3"
+            y2="30"
+            stroke="rgba(150,120,80,0.7)"
+            stroke-width="1.5"
+            stroke-dasharray="2,2"
+          />
+          <!-- Buddha Head -->
+          <circle cx="0" cy="30" r="14" fill="rgba(200,160,100,0.95)" />
+          <circle
+            cx="0"
+            cy="30"
+            r="14"
+            fill="rgba(220,180,120,0.6)"
+            opacity="0.8"
+          />
+          <!-- Buddha Curled Hair -->
+          <circle cx="-8" cy="18" r="3" fill="rgba(180,140,80,0.9)" />
+          <circle cx="-4" cy="16" r="2.5" fill="rgba(180,140,80,0.9)" />
+          <circle cx="0" cy="15" r="3" fill="rgba(180,140,80,0.9)" />
+          <circle cx="4" cy="16" r="2.5" fill="rgba(180,140,80,0.9)" />
+          <circle cx="8" cy="18" r="3" fill="rgba(180,140,80,0.9)" />
+          <!-- Buddha Face -->
+          <circle cx="-5" cy="28" r="2.5" fill="rgba(100,60,30,0.8)" />
+          <circle cx="5" cy="28" r="2.5" fill="rgba(100,60,30,0.8)" />
+          <!-- Serene smile -->
+          <path
+            d="M-6,35 Q0,37 6,35"
+            stroke="rgba(100,60,30,0.6)"
+            stroke-width="1.5"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <!-- Buddha Body -->
+          <ellipse
+            cx="0"
+            cy="50"
+            rx="12"
+            ry="16"
+            fill="rgba(200,160,100,0.95)"
+          />
+          <!-- Robe folds -->
+          <path
+            d="M-8,48 Q-10,52 -8,58"
+            stroke="rgba(150,110,60,0.7)"
+            stroke-width="1"
+            fill="none"
+          />
+          <path
+            d="M8,48 Q10,52 8,58"
+            stroke="rgba(150,110,60,0.7)"
+            stroke-width="1"
+            fill="none"
+          />
+          <!-- Hands in meditation -->
+          <circle cx="-7" cy="58" r="3" fill="rgba(200,160,100,0.9)" />
+          <circle cx="7" cy="58" r="3" fill="rgba(200,160,100,0.9)" />
+          <!-- Base/Lotus -->
+          <ellipse cx="0" cy="68" rx="14" ry="5" fill="rgba(240,200,100,0.4)" />
+          <ellipse cx="0" cy="69" rx="12" ry="3" fill="rgba(220,180,80,0.5)" />
+        </g>
+
+        <!-- BOUDHANATH STUPA (Enhanced) -->
+        <g transform="translate(200, 280)" opacity="0.9">
+          <!-- Stupa base layers -->
+          <ellipse cx="0" cy="0" rx="45" ry="12" fill="rgba(200,180,150,0.4)" />
+          <ellipse cx="0" cy="-2" rx="42" ry="10" fill="rgba(220,200,170,0.5)" />
+          <rect x="-35" y="-15" width="70" height="20" fill="rgba(180,150,100,0.5)" rx="3" />
+          <polygon points="0,-15 35,-8 35,5 0,12 -35,5 -35,-8" fill="rgba(200,170,130,0.6)" />
+          <!-- Central dome -->
+          <ellipse cx="0" cy="-25" rx="28" ry="32" fill="rgba(220,200,160,0.85)" />
+          <ellipse cx="0" cy="-28" rx="25" ry="28" fill="rgba(240,220,180,0.7)" />
+          <!-- Golden spire -->
+          <polygon points="0,-60 8,-50 0,-45 -8,-50" fill="rgba(212,160,23,0.9)" />
+          <circle cx="0" cy="-68" r="3" fill="rgba(255,223,0,1)" />
+          <!-- Eyes of Buddha -->
+          <circle cx="-12" cy="-32" r="3" fill="rgba(0,0,0,0.8)" />
+          <circle cx="12" cy="-32" r="3" fill="rgba(0,0,0,0.8)" />
+          <path d="M-15,-32 Q0,-30 15,-32" stroke="rgba(212,160,23,0.6)" stroke-width="1" fill="none" />
+        </g>
+
+        <!-- SWAYAMBHUNATH TEMPLE -->
+        <g transform="translate(150, 350)" opacity="0.85">
+          <!-- Temple base -->
+          <polygon points="0,-40 35,-20 35,10 0,25 -35,10 -35,-20" fill="rgba(150,100,50,0.7)" />
+          <!-- Main temple structure -->
+          <rect x="-25" y="-30" width="50" height="35" fill="rgba(180,140,80,0.8)" rx="4" />
+          <!-- Roof (triangle stacking) -->
+          <polygon points="-25,-30 25,-30 30,-35 -30,-35" fill="rgba(160,120,60,0.9)" />
+          <polygon points="-20,-38 20,-38 25,-43 -25,-43" fill="rgba(180,140,80,0.8)" />
+          <polygon points="-15,-46 15,-46 18,-50 -18,-50" fill="rgba(200,160,100,0.7)" />
+          <!-- Central spire -->
+          <polygon points="0,-50 5,-45 0,-40 -5,-45" fill="rgba(212,160,23,0.9)" />
+          <circle cx="0" cy="-55" r="2.5" fill="rgba(255,223,0,0.95)" />
+        </g>
+
+        <!-- MORE YAKS (Herd) -->
+        <!-- Yak 1 -->
+        <g transform="translate(250, 450)" opacity="0.8">
+          <ellipse cx="0" cy="0" rx="18" ry="12" fill="rgba(8,5,3,0.95)" />
+          <circle cx="-15" cy="-5" r="8" fill="rgba(12,8,4,0.95)" />
+          <circle cx="-18" cy="-9" r="3" fill="rgba(60,40,20,0.8)" />
+          <path d="M-20,-12 Q-22,-18 -20,-14" stroke="rgba(8,5,3,0.9)" stroke-width="2" fill="none" />
+          <rect x="-5" y="8" width="3" height="12" rx="1" fill="rgba(8,5,3,0.85)" />
+          <rect x="2" y="8" width="3" height="12" rx="1" fill="rgba(8,5,3,0.85)" />
+          <ellipse cx="-12" cy="20" rx="4" ry="2" fill="rgba(5,3,2,0.9)" />
+        </g>
+
+        <!-- Yak 2 (smaller, background) -->
+        <g transform="translate(320, 440)" opacity="0.6">
+          <ellipse cx="0" cy="0" rx="14" ry="9" fill="rgba(8,5,3,0.7)" />
+          <circle cx="-11" cy="-4" r="6" fill="rgba(12,8,4,0.7)" />
+          <rect x="-3" y="7" width="2.5" height="9" rx="1" fill="rgba(8,5,3,0.7)" />
+          <rect x="3" y="7" width="2.5" height="9" rx="1" fill="rgba(8,5,3,0.7)" />
+        </g>
+
+        <!-- SPINY BABBLER BIRDS -->
+        <!-- Bird 1 (perched) -->
+        <g transform="translate(1200, 250)" opacity="0.85">
+          <!-- Body -->
+          <ellipse cx="0" cy="0" rx="6" ry="8" fill="rgba(80,70,50,0.9)" />
+          <!-- Head -->
+          <circle cx="0" cy="-8" r="4" fill="rgba(90,80,60,0.9)" />
+          <!-- Eye -->
+          <circle cx="1.5" cy="-8" r="1.2" fill="rgba(0,0,0,0.8)" />
+          <!-- Beak -->
+          <polygon points="3,-8 5,-7.5 3,-6.5" fill="rgba(100,80,40,0.9)" />
+          <!-- Wings detail -->
+          <path d="M-4,-2 Q-8,0 -4,4" stroke="rgba(60,50,30,0.7)" stroke-width="1" fill="none" />
+          <!-- Tail feathers -->
+          <path d="M4,4 L8,8" stroke="rgba(70,60,40,0.8)" stroke-width="2" stroke-linecap="round" />
+          <path d="M4,4 L8,7" stroke="rgba(75,65,45,0.8)" stroke-width="1.5" stroke-linecap="round" />
+        </g>
+
+        <!-- Bird 2 (flying) -->
+        <g transform="translate(1350, 200)" opacity="0.75">
+          <ellipse cx="0" cy="0" rx="5" ry="6" fill="rgba(85,75,55,0.85)" />
+          <circle cx="0" cy="-7" r="3" fill="rgba(95,85,65,0.85)" />
+          <!-- Wings -->
+          <path d="M-5,0 L-12,-4 L-5,2" fill="rgba(70,60,40,0.7)" />
+          <path d="M5,0 L12,-4 L5,2" fill="rgba(65,55,35,0.8)" />
+          <circle cx="1" cy="-6.5" r="0.8" fill="rgba(0,0,0,0.7)" />
+        </g>
+
+        <!-- MOUNTAIN GUMBA (Monastery) -->
+        <g transform="translate(800, 320)" opacity="0.8">
+          <!-- Building base -->
+          <rect x="-20" y="-30" width="40" height="35" fill="rgba(120,80,40,0.85)" rx="2" />
+          <!-- Central tower/stupa -->
+          <polygon points="0,-40 8,-35 8,-20 0,-15 -8,-20 -8,-35" fill="rgba(150,110,60,0.9)" />
+          <!-- Roof -->
+          <polygon points="-20,-30 20,-30 25,-35 -25,-35" fill="rgba(100,60,20,0.85)" />
+          <!-- Windows -->
+          <rect x="-15" y="-20" width="6" height="6" fill="rgba(40,30,20,0.9)" />
+          <rect x="9" y="-20" width="6" height="6" fill="rgba(40,30,20,0.9)" />
+          <rect x="-15" y="-8" width="6" height="6" fill="rgba(40,30,20,0.9)" />
+          <rect x="9" y="-8" width="6" height="6" fill="rgba(40,30,20,0.9)" />
+          <!-- Prayer flags on top -->
+          <line x1="-12" y1="-40" x2="12" y2="-40" stroke="rgba(200,150,100,0.6)" stroke-width="1" />
+          <circle cx="-10" cy="-42" r="2" fill="rgba(220,50,50,0.6)" />
+          <circle cx="-5" cy="-42" r="2" fill="rgba(220,220,220,0.6)" />
+          <circle cx="0" cy="-42" r="2" fill="rgba(50,100,200,0.6)" />
+          <circle cx="5" cy="-42" r="2" fill="rgba(50,180,50,0.6)" />
+          <circle cx="10" cy="-42" r="2" fill="rgba(255,150,0,0.6)" />
+        </g>
+
+        <text
+          x="720"
+          y="495"
+          text-anchor="middle"
+          fill="rgba(212,160,23,0.12)"
+          font-size="11"
+          font-family="serif"
+        >
+          नेपाल
+        </text>
+      </svg>
+
+      <!-- Hero Content -->
+      <div class="hero-wrapper">
+        <div class="hero-content">
+          <h1 class="hero-name">Rishav <em>Jha</em></h1>
+          <p class="hero-tagline">
+            <span id="typedText"></span><span class="typing-cursor"></span>
+          </p>
+          <!-- <p class="hero-description">
+            Full Stack .NET + Angular developer at Wipro. IEEE-published AI researcher. Building software that matters.
+          </p> -->
+          
+          <div class="hero-stats">
+            <div class="stat-hero">
+              <div class="stat-value">1.5+</div>
+              <div class="stat-label">Years AI Research</div>
             </div>
-            <div class="terminal-title">intro.sh</div>
+            <div class="stat-hero">
+              <div class="stat-value">6+</div>
+              <div class="stat-label">Publications</div>
+            </div>
+            <div class="stat-hero">
+              <div class="stat-value">3+</div>
+              <div class="stat-label">Years Comedy</div>
+            </div>
           </div>
-          <div class="terminal-body hero-terminal-body">
-            <div class="hero-content">
-              <div class="hero-text">
-                <div class="terminal-header">
-                  <span class="terminal-prompt">rishav@portfolio:~$</span>
-                  <span class="typed-text">whoami</span>
-                </div>
-                <h1 class="hero-name">Rishav Jha</h1>
-                <h2 class="hero-title">Computer Engineer & AI Researcher</h2>
-                <p class="hero-tagline">
-                  "<span class="typing-animation"
-                    >Blending technology, research, and innovation.</span
-                  >"<span class="blinking-cursor">|</span>
-                </p>
-                <div class="hero-buttons">
-                  <a href="#projects" class="btn btn-primary terminal-btn"
-                    >> View Projects</a
-                  >
-                  <a href="Rishav_Jha_Resume.pdf" target="_blank" class="btn btn-outline terminal-btn" style="margin-left: 1rem;">
-                    Resume
-                  </a>
-                </div>
+
+          <div class="hero-btns">
+            <a href="#projects" class="btn-primary">View Work</a>
+            <a href="#contact" class="btn-outline">Hire Me ⭐</a>
+            <a
+              href="resume.pdf"
+              download="Rishav_Jha_Resume.pdf"
+              class="btn-resume"
+              >📄 Resume</a
+            >
+          </div>
+        </div>
+
+        <div class="hero-profile">
+          <div class="profile-frame">
+            <div class="profile-border-outer"></div>
+            <div class="profile-border-inner"></div>
+            <img src="profile.jpg" alt="Rishav Jha" class="profile-image" />
+            <div class="profile-accent top-left"></div>
+            <div class="profile-accent top-right"></div>
+            <div class="profile-accent bottom-left"></div>
+            <div class="profile-accent bottom-right"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+        <div class="scroll-dot"></div>
+        <div class="scroll-dot"></div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-visual reveal">
+            <div class="avatar-mandala">
+              <div class="mandala-ring"></div>
+              <div class="mandala-ring mandala-ring-2"></div>
+              <div class="mandala-ring mandala-ring-3"></div>
+              <div class="avatar-center">
+                <img src="new.jpg" alt="Rishav Jha" class="avatar-photo" />
+              </div>
+            </div>
+            <div class="about-tags">
+              <span class="tag">🇳🇵 Nepal</span>
+              <span class="tag">📍 Bangalore</span>
+              <span class="tag">💼 Wipro</span>
+              <span class="tag">🎤 Comedian</span>
+              <span class="tag">🏓 Table Tennis</span>
+              <span class="tag">🧠 AI Researcher</span>
+              <span class="tag">.NET Full Stack Developer</span>
+            </div>
+          </div>
+          <div class="about-text reveal">
+            <div class="section-eyebrow">01 — about me</div>
+            <h2 class="section-title">
+              From the <em>Himalayas</em><br />to the Cloud
+            </h2>
+            <p>
+              I'm a <strong>.NET Full Stack Angular Developer</strong> at <span class="wipro-highlight">Wipro</span>,
+              Bangalore — originally from Nepal, where mountains taught me that
+              the summit is never the destination, the climb is.
+            </p>
+            <p>
+              With a B.Tech in CSE + Financial Economics Minor from KIIT
+              University, I blend
+              <strong>1.5 years of AI & Deep Learning research</strong> with
+              production-grade full stack development. Published in IEEE. Stood
+              on stage doing stand-up comedy for 3+ years.
+            </p>
+            <p>
+              Fast learner. Strong communicator. Builder of things that actually
+              work.
+            </p>
+            <div class="stat-row">
+              <div class="stat-item">
+                <div class="num">1.5+</div>
+                <div class="lbl">Years Research</div>
+              </div>
+              <div class="stat-item">
+                <div class="num">6+</div>
+                <div class="lbl">Research Papers</div>
+              </div>
+              <div class="stat-item">
+                <div class="num">3+</div>
+                <div class="lbl">Years Standup Comedy</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="hero-particles"></div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
+    <!-- WHY HIRE ME -->
+    <section id="why">
       <div class="container">
-        <div class="terminal-window">
-          <div class="terminal-header-bar">
-            <div class="terminal-buttons">
-              <span class="btn-close"></span>
-              <span class="btn-minimize"></span>
-              <span class="btn-maximize"></span>
-            </div>
-            <div class="terminal-title">about.sh</div>
+        <div style="text-align: center; margin-bottom: 3rem" class="reveal">
+          <div class="section-eyebrow" style="justify-content: center">
+            02 — why hire me
           </div>
-          <div class="terminal-body">
-            <div class="section-header">
-              <h2 class="section-title">About Me</h2>
-              <div class="terminal-line">
-                <span class="terminal-prompt">rishav@portfolio:~$</span> cat
-                about.txt
-              </div>
-            </div>
-            <div class="glass-card-about-me">
-              <div class="card-content-about-me">
-                <p class="about-text-about-me">
-                  Recent B.Tech graduate Major in Computer Science & Engineering
-                  and Minor in Financial Economics using Data Analytics<br />
-                  <br />
-                 
-                  1.5 years research experience in deep learning & AI.
-                  <br /><br />Effective communicator & fast learner, driven to
-                  contribute to high-impact projects.
-                </p>
-                </div>
-              </div>
-            </div>
+          <h2 class="section-title">6 Reasons I'm Your <em>Next Dev</em></h2>
+        </div>
+        <div class="why-grid reveal">
+          <div class="why-card">
+            <div class="why-num">01</div>
+            <div class="why-icon">🚀</div>
+            <h3>Real-World Full Stack</h3>
+            <p>
+              .NET + Angular + JWT + REST APIs in production at Wipro. Not just
+              tutorials — shipped code that runs.
+            </p>
           </div>
+          <div class="why-card">
+            <div class="why-num">02</div>
+            <div class="why-icon">🧠</div>
+            <h3>Research Mindset</h3>
+            <p>
+              IEEE-published AI/ML researcher. I bring academic rigor to
+              practical problems — trained CNNs, Transformers, and published the
+              results.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">03</div>
+            <div class="why-icon">⚡</div>
+            <h3>Fast Learner</h3>
+            <p>
+              Went from CSE undergrad to full stack developer to published AI
+              researcher in 4 years. New tech? Give me a week.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">04</div>
+            <div class="why-icon">🎯</div>
+            <h3>Problem Solver</h3>
+            <p>
+              From ML models that predict Olympic medals to e-commerce platforms
+              with analytics dashboards — I ship end-to-end.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">05</div>
+            <div class="why-icon">🗣️</div>
+            <h3>Communication +100</h3>
+            <p>
+              3+ years of stand-up comedy = elite communication under pressure.
+              I can explain anything to anyone, including your non-technical
+              stakeholders.
+            </p>
+          </div>
+          <div class="why-card">
+            <div class="why-num">06</div>
+            <div class="why-icon">💼</div>
+            <h3>Industry Ready</h3>
+            <p>
+              Live Wipro experience, real teams, real deadlines. Study in India
+              scholarship holder. Presented at IIT Bhubaneswar
+            </p>
+          </div>
+        </div>
+        <div class="why-cta reveal">
+          <a href="#contact" class="btn-primary">Let's Work Together →</a>
         </div>
       </div>
     </section>
 
-    <!-- Education & Technical Skills Section -->
-    <section id="education" class="section">
+    <!-- EDUCATION + WORK JOURNEY (Split Layout) -->
+    <section id="education">
       <div class="container">
-        <div style="display: flex; gap: 2rem; flex-wrap: wrap">
-          <!-- Education Terminal -->
-          <div
-            class="terminal-window"
-            style="flex: 1; min-width: 320px; max-width: 600px"
-          >
-            <div class="terminal-header-bar">
-              <div class="terminal-buttons">
-                <span class="btn-close"></span>
-                <span class="btn-minimize"></span>
-                <span class="btn-maximize"></span>
-              </div>
-              <div class="terminal-title">education.sh</div>
+        <div class="reveal" style="text-align: center; margin-bottom: 1rem">
+          <div class="section-eyebrow" style="justify-content: center">
+            03 — journey
+          </div>
+          <h2 class="section-title">My <em>Path</em></h2>
+        </div>
+        <div class="edu-quote-block reveal">
+          <div class="edu-sidebar-quote">
+            "Education is not the filling of a pail, but the lighting of a
+            fire."
+          </div>
+          <div class="edu-sidebar-attr">— W.B. Yeats</div>
+        </div>
+
+        <!-- DUAL COLUMN: ACADEMIC LEFT, WORK RIGHT -->
+        <div class="journey-dual reveal">
+          <!-- LEFT: ACADEMIC JOURNEY -->
+          <div class="journey-col journey-col--academic">
+            <div class="journey-col-header">
+              <span class="journey-col-icon">🎓</span>
+              <h3 class="journey-col-title">Academic <em>Journey</em></h3>
+              <div class="journey-col-line"></div>
             </div>
-            <div class="terminal-body">
-              <div class="section-header" style="text-align: left">
-                <h2 class="section-title">Education</h2>
-                <div class="terminal-line">
-                  <span class="terminal-prompt">rishav@portfolio:~$</span> ls
-                  -la education/
-                </div>
-              </div>
-              <div class="education-timeline">
-                <div class="timeline-item glass-card">
-                  <div class="timeline-date">2021–2025</div>
-                  <div class="timeline-content">
-                    <h3>
-                      B.Tech in Computer Science & Engineering (Major)<br>
-                      Minor in Financial Economics using Data Analytics
-                    </h3>
-                    <p>Kalinga Institute of Industrial Technology (KIIT) University<br>Bhubaneswar,Odisha,India</p>
+
+            <div class="journey-tl">
+              <div class="journey-tl-item">
+                <div class="journey-tl-dot"></div>
+                <div class="journey-year-tag">2021 — 2025</div>
+                <div class="journey-card journey-card--edu">
+                  <div class="journey-card-logo">
+                    <img src="kiitlogo.png" alt="KIIT University Logo" />
+                  </div>
+                  <div>
+                    <div class="journey-inst">KIIT University, Bhubaneswar</div>
+                    <div class="journey-deg">
+                      B.Tech Computer Science Engineering
+                    </div>
+                    <div class="journey-sub">
+                      <em>Minor in Financial Economics (Data Analytics)</em>
+                    </div>
+                    <div class="journey-badges">
+                      <span class="j-badge">⭐ IEEE Published</span>
+                      <span class="j-badge">🎓 Study in India Scholar</span>
+                      <span class="j-badge j-badge--sky"
+                        >📍 Bhubaneswar, Odisha</span
+                      >
+                    </div>
+                    <div class="journey-highlights">
+                      <!-- <div class="jh-item">
+                        📄 2 IEEE Published Research Papers
+                      </div> -->
+
+                      <!-- <div class="jh-item">🏆 KIIT Tech Fest Presenter</div>
+                      <div class="jh-item">🎤 Stand-up Comedy Club</div> -->
+                    </div>
                   </div>
                 </div>
-                <div class="timeline-item glass-card high-school">
-                  <div class="timeline-date">2018–2020</div>
-                  <div class="timeline-content">
-                    <h3>High School</h3>
-                    <p>Kathmandu Model Secondary School<br/>Bagbazar,Kathmandu,Nepal</p>
+              </div>
+
+              <div class="journey-tl-item">
+                <div class="journey-tl-dot"></div>
+                <div class="journey-year-tag">2018 — 2020</div>
+                <div class="journey-card journey-card--edu">
+                  <div class="journey-card-logo">
+                    <img src="kmclogo.png" alt="Kathmandu Model Secondary School Logo" />
+                  </div>
+                  <div>
+                    <div class="journey-inst">
+                      Kathmandu Model Secondary School
+                    </div>
+                    <div class="journey-deg">
+                      Higher Secondary (+2) — Science Stream
+                    </div>
+                    <div class="journey-sub"><em>Kathmandu</em></div>
+                    <div class="journey-badges">
+                      <span class="j-badge">📚 Science Stream</span>
+                      <span class="j-badge j-badge--nepal">🇳🇵 Nepal</span>
+                    </div>
+                    <div class="journey-highlights">
+                      <!-- <div class="jh-item">
+                        🏔️ Himalayan roots, global vision
+                      </div>
+
+                      <div class="jh-item">🎸 Guitar & cultural activities</div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="journey-tl-item">
+                <div class="journey-tl-dot"></div>
+                <div class="journey-year-tag">2018</div>
+                <div class="journey-card journey-card--edu">
+                  <div class="journey-card-logo">
+                    <img src="images.jpg" alt="Reliance E.S.B School Logo" />
+                  </div>
+                  <div>
+                    <div class="journey-inst">Reliance E.S.B School</div>
+                    <div class="journey-deg">Primary & Secondary Education</div>
+                    <!-- <div class="journey-sub">
+                          <em>Where the mountains shaped the mindset</em>
+                        </div> -->
+                    <div class="journey-badges">
+                      <span class="j-badge j-badge--nepal"
+                        >🇳🇵 Hetauda, Nepal</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Technical Skills Terminal -->
-          <div
-            class="terminal-window"
-            style="flex: 1; min-width: 320px; max-width: 600px"
-          >
-            <div class="terminal-header-bar">
-              <div class="terminal-buttons">
-                <span class="btn-close"></span>
-                <span class="btn-minimize"></span>
-                <span class="btn-maximize"></span>
-              </div>
-              <div class="terminal-title">skills.sh</div>
+
+          <!-- RIGHT: WORK JOURNEY -->
+          <div class="journey-col journey-col--work">
+            <div class="journey-col-header">
+              <span class="journey-col-icon">💼</span>
+              <h3 class="journey-col-title">Work <em>Experience</em></h3>
+              <div class="journey-col-line journey-col-line--work"></div>
             </div>
-            <div class="terminal-body">
-              <div class="section-header" style="text-align: left">
-                <h2 class="section-title">Technical Skills</h2>
-                <div class="terminal-line">
-                  <span class="terminal-prompt">rishav@portfolio:~$</span> cat
-                  skills.txt
+
+            <!-- WIPRO FEATURED CARD -->
+            <div class="wipro-featured-card reveal">
+              <div class="wipro-logo-row">
+                <div class="wipro-logo-badge">
+                  <img src="wiprologo.png" alt="Wipro Logo" style="width: 100%; height: 100%; object-fit: contain;" />
+                </div>
+                <div>
+                  <div class="wipro-company">WIPRO LIMITED</div>
+                  <div class="wipro-location">📍 Bengaluru, India</div>
+                </div>
+                <div class="wipro-status-badge">🟢 Current</div>
+              </div>
+              <div class="wipro-role">
+                Project Engineer — .NET Full Stack Angular
+              </div>
+              <div class="wipro-period">March 2026 – Present</div>
+              <div class="wipro-divider"></div>
+              <div class="wipro-responsibilities">
+                <div class="wipro-resp-item">
+                  <span class="wipro-resp-dot"></span>
+                  Completed pre-skilling training in .NET Full Stack Development
+                </div>
+                <div class="wipro-resp-item">
+                  <span class="wipro-resp-dot"></span>
+                  Hands-on experience with Angular, ASP.NET Core, C# &amp; SQL
+                  Server
+                </div>
+                <div class="wipro-resp-item">
+                  <span class="wipro-resp-dot"></span>
+                  Frontend-backend integration and REST API development
+                </div>
+                <div class="wipro-resp-item">
+                  <span class="wipro-resp-dot"></span>
+                  Enterprise software development in Agile environment
                 </div>
               </div>
-              <div
-                class="skills-list glass-card"
-                style="
-                  font-family: var(--font-mono);
-                  font-size: 1rem;
-                  color: var(--terminal-cyan);
-                  line-height: 1.7;
-                "
-              >
-                <strong>• Languages:</strong> C++, Python, Java<br /><br />
-                <strong>• Web & Backend:</strong> HTML, CSS, JavaScript, MERN
-                Stack, Spring MVC<br /><br />
-                <strong>• Database:</strong> Mysql, Postgres<br /><br />
-                <strong>• ML & DL:</strong> Scikit-Learn, TensorFlow, Keras,
-                PyTorch, CNN, RNN, Transformers<br /><br />
-                <strong>• NLP & Data Analysis:</strong> NLTK, Hugging Face,
-                Pandas, NumPy, Matplotlib, Seaborn, EDA<br /><br />
-                <strong>• Developer Tools:</strong> IntelliJ, VS Code, Git,
-                Eclipse, Jupyter Notebook
+              <div class="wipro-tech-stack">
+                <span class="wipro-tech">.NET 8</span>
+                <span class="wipro-tech">Angular 21</span>
+                <span class="wipro-tech">C#</span>
+                <span class="wipro-tech">SQL Server</span>
+                <span class="wipro-tech">JWT</span>
+                <span class="wipro-tech">REST APIs</span>
+              </div>
+              <!-- <div class="wipro-achievement">
+                <span class="wipro-ach-icon">🏆</span>
+                <span
+                  >Selected through competitive campus placement at KIIT — one
+                  of top finalists</span
+                >
+              </div> -->
+            </div>
+
+            <!-- Research work card -->
+            <div class="journey-tl">
+              <div class="journey-tl-item" style="margin-top: 2rem">
+                <div class="journey-tl-dot journey-tl-dot--research"></div>
+                <div class="journey-year-tag journey-year-tag--research">
+                  2024 — 2025
+                </div>
+                <div class="journey-card journey-card--research">
+                  <div class="journey-card-logo">
+                    <img src="kiitlogo.png" alt="KIIT University Logo" />
+                  </div>
+                  <div>
+                    <div class="journey-inst">
+                      AI & ML Research — KIIT University
+                    </div>
+                    <div class="journey-deg">
+                      Undergraduate Researcher (1.5 Years)
+                    </div>
+                    <div class="wipro-period">Jan 2024 – May 2025</div>
+                    <div class="journey-sub">
+                      <em>Multimodal Sentiment Analysis · Financial NLP</em>
+                    </div>
+                    <div class="journey-badges">
+                      <span class="j-badge j-badge--ieee"
+                        >📑 IEEE ICoICC 2025</span
+                      >
+                      <span class="j-badge j-badge--ieee"
+                        >📑 IEEE ESIC 2025</span
+                      >
+                    </div>
+                    <div class="journey-highlights">
+                      <div class="jh-item">
+                        🧠 Deep Learning · Transformers · BERT
+                      </div>
+                      <div class="jh-item">
+                        📊 Financial Sentiment · Multimodal AI
+                      </div>
+                      <div class="jh-item">🏛️ Presented at IIT Bhubaneswar</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -210,410 +902,1848 @@
       </div>
     </section>
 
-    <!-- Publications Section -->
-    <section id="publications" class="section">
+    <!-- SKILLS -->
+    <section id="skills">
       <div class="container">
-        <div class="terminal-window">
-          <div class="terminal-header-bar">
-            <div class="terminal-buttons">
-              <span class="btn-close"></span>
-              <span class="btn-minimize"></span>
-              <span class="btn-maximize"></span>
-            </div>
-            <div class="terminal-title">publications.sh</div>
+        <div class="reveal" style="text-align: center; margin-bottom: 0.5rem">
+          <div class="section-eyebrow" style="justify-content: center">
+            04 — skills
           </div>
-          <div class="terminal-body">
-            <div class="section-header">
-              <h2 class="section-title">Publications</h2>
-              <div class="terminal-line">
-                <span class="terminal-prompt">rishav@portfolio:~$</span> grep -r
-                "publications" ./research/
-              </div>
+          <h2 class="section-title">Technical <em>Skills</em></h2>
+          <p
+            style="
+              color: var(--ink-light);
+              font-size: 0.95rem;
+              font-weight: 300;
+              max-width: 540px;
+              margin: 0 auto 3rem;
+              line-height: 1.7;
+            "
+          >
+            A full-spectrum skill set spanning enterprise backends, modern
+            frontends, and cutting-edge AI.
+          </p>
+        </div>
+        <div class="skills-grid reveal">
+          <!-- Row 1 -->
+          <div class="skill-cat-card" data-accent="#00bfff">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #00bfff; box-shadow: 0 0 8px #00bfff"
+              ></span>
+              <span class="skill-cat-title">.NET Stack</span>
+              <!-- <span class="skill-primary-tag">⭐ Primary Domain</span> -->
             </div>
-            <div class="publications-grid">
-              <div class="publication-category">
-                <h3 class="category-title">Published Papers</h3>
-                <div class="publication-item glass-card">
-                  <h4>
-                    <a
-                      href="https://ieeexplore.ieee.org/document/11052112"
-                      target="_blank"
-                      class="publication-link"
-                      >Deep Learning Architectures for Multimodal Sentiment
-                      Analysis</a
-                    >
-                  </h4>
-                  <span class="publication-type">IEEE</span>
-                </div>
-                <br/>
-                <div class="publication-item glass-card">
-                  <h4>
-                    <a
-                      href="https://ieeexplore.ieee.org/document/10962717"
-                      target="_blank"
-                      class="publication-link"
-                      >Deep Learnings for Financial Sentiment Analysis</a
-                    >
-                  </h4>
-                  <span class="publication-type">IEEE</span>
-                </div>
-                <div class="publication-item glass-card">
-                  <h4>
-                   
-                      Leveraging Deep Learning for Sentiment Analysis in Nepali Language Literature
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>ASP.NET Core</span><span>.NET 8</span><span>C#</span>
+              <span>Entity Framework Core</span><span>Web API</span>
+              <span>JWT Auth</span><span>Angular 21</span><span>RxJS</span
+              ><span>TypeScript</span>
+            </div>
+          </div>
+          <div class="skill-cat-card" data-accent="#ff8c42">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #ff8c42; box-shadow: 0 0 8px #ff8c42"
+              ></span>
+              <span class="skill-cat-title">Programming Languages</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>C++</span><span>Python</span><span>C#</span>
+              <span>JavaScript</span><span>TypeScript</span><span>SQL</span>
+            </div>
+          </div>
+          <div class="skill-cat-card" data-accent="#52b788">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #52b788; box-shadow: 0 0 8px #52b788"
+              ></span>
+              <span class="skill-cat-title">Web &amp; Frontend</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>HTML5</span><span>CSS3</span><span>Angular</span
+              ><span>React</span> <span>Tailwind CSS</span
+              ><span>Spring MVC</span><span>REST APIs</span>
+            </div>
+          </div>
+          <div class="skill-cat-card" data-accent="#9b72cf">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #9b72cf; box-shadow: 0 0 8px #9b72cf"
+              ></span>
+              <span class="skill-cat-title">Databases</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>MySQL</span><span>PostgreSQL</span>
+              <span>MS SQL Server</span><span>Entity Framework</span>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="skill-cat-card" data-accent="#e84393">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #e84393; box-shadow: 0 0 8px #e84393"
+              ></span>
+              <span class="skill-cat-title">AI / ML / Deep Learning</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>TensorFlow</span><span>PyTorch</span><span>CNN</span>
+              <span>RNN</span><span>Transformers</span><span>BERT</span>
+              <span>Transfer Learning</span>
+            </div>
+          </div>
+          <div class="skill-cat-card" data-accent="#ffd166">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #ffd166; box-shadow: 0 0 8px #ffd166"
+              ></span>
+              <span class="skill-cat-title">NLP &amp; Data Science</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>NLTK</span><span>Hugging Face</span><span>Pandas</span>
+              <span>NumPy</span><span>Scikit-learn</span><span>Matplotlib</span>
+              <span>Word2Vec</span>
+            </div>
+          </div>
+          <div class="skill-cat-card" data-accent="#43d9ad">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #43d9ad; box-shadow: 0 0 8px #43d9ad"
+              ></span>
+              <span class="skill-cat-title">Tools &amp; DevOps</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>Git</span><span>GitHub</span><span>VS Code</span>
+              <span>Visual Studio</span><span>IntelliJ IDEA</span>
+              <span>Postman</span><span>Figma</span>
+            </div>
+          </div>
+          <div class="skill-cat-card" data-accent="#ff6b6b">
+            <div class="skill-cat-header">
+              <span
+                class="skill-cat-dot"
+                style="background: #ff6b6b; box-shadow: 0 0 8px #ff6b6b"
+              ></span>
+              <span class="skill-cat-title">Computer Vision</span>
+            </div>
+            <div class="skill-cat-bar"></div>
+            <div class="skill-cat-pills">
+              <span>OpenCV</span><span>Image Processing</span>
+              <span>Face Recognition</span><span>Object Detection</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">05 — projects</div>
+          <h2 class="section-title">Built to <em>Ship</em></h2>
+        </div>
+
+        <!-- PROJECT SHOWCASE - 4 Main Projects with Display Cards -->
+        <div class="project-showcase reveal">
+          <div class="showcase-grid">
+            <!-- ShopForHome -->
+            <div class="showcase-card">
+               <div class="team-badge">✦ Featured Project</div>
+            
+              <div class="showcase-image-wrapper">
+                <img
+                  src="m.png"
+                  alt="ShopForHome - E-Commerce Platform"
+                  class="showcase-image"
+                  />
+                  <div class="showcase-overlay">
+                    <h3>ShopForHome</h3>
+                    <p>Full-Stack E-Commerce Platform</p>
                     
-                  </h4>
-                 <!--  <span class="publication-type">IEEE</span> -->
-                </div>
-              </div>
-              <div class="publication-category">
-                <h3 class="category-title">Conclave papers</h3>
-                <div class="publication-item glass-card">
-                  <h4>Cultural Practices and Environmental Adaptations in Nepal’s Hill Communities</h4>
-                  <span class="publication-status">Book</span>
-                </div>
-                  <br/>
-                <div class="publication-item glass-card">
-                  <h4>Navigating Growth, Urbanization, and Debt: A Multidimensional Analysis of Nepal's Economic Transformation (2010-2022)</h4>
-                  
-                </div>
-                  <br/>
-                <div class="publication-item glass-card">
-                  <h4>Everyday life in Nepal's hill communities: An exploration of cultural practices and environmental adaptations</h4>
-                  <span class="publication-status">Book</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="terminal-window">
-          <div class="terminal-header-bar">
-            <div class="terminal-buttons">
-              <span class="btn-close"></span>
-              <span class="btn-minimize"></span>
-              <span class="btn-maximize"></span>
-            </div>
-            <div class="terminal-title">projects.sh</div>
-          </div>
-          <div class="terminal-body">
-            <div class="section-header">
-              <h2 class="section-title">Projects</h2>
-              <div class="terminal-line">
-                <span class="terminal-prompt">rishav@portfolio:~$</span> ls -la
-                ./projects/
-              </div>
-            </div>
-            <div class="projects-grid">
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Olympic Medal Prediction</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">ML</span>
-                    <span class="tech-tag">Random Forest</span>
                   </div>
                 </div>
-                <p>
-                  Machine learning model to predict Olympic medal outcomes using
-                  historical data and athlete performance metrics.
-                </p>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Amazon Recommendation System</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">ML</span>
-                    <span class="tech-tag">Data Analysis</span>
+                <div class="showcase-details">
+                  <h4>ShopForHome</h4>
+                  <div class="tech-stack-mini">
+                    <span class="tech-tag-mini">.NET 8</span>
+                    <span class="tech-tag-mini">Angular</span>
+                    <span class="tech-tag-mini">PostgreSQL</span>
                   </div>
                 </div>
-                <p>
-                  Intelligent product recommendation engine analyzing user
-                  behavior and purchase patterns.
-                </p>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Word2Vec</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">NLP</span>
-                    <span class="tech-tag">Word2Vec</span>
-                  </div>
-                </div>
-                <p>
-                  Natural language processing model to identify semantic
-                  outliers in word groups using vector representations.
-                </p>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Invisible Cloak</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">OpenCV</span>
-                    <span class="tech-tag">Computer Vision</span>
-                  </div>
-                </div>
-                <p>
-                  Real-time computer vision application creating invisibility
-                  effects using background subtraction techniques.
-                </p>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Snapchat filter</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">ML</span>
-                    <span class="tech-tag">AI</span>
-                  </div>
-                </div>
-                <p>
-                 AI/ML-powered Snapchat filter! It adds a mustache and goggles to any face using advanced facial landmark detection.
-                </p>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Face Recognition System</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">KNN</span>
-                    <span class="tech-tag">OpenCV</span>
-                  </div>
-                </div>
-                <p>
-                  Biometric identification system using K-nearest neighbors
-                  algorithm for accurate face detection and recognition.
-                </p>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Diary style portfolio website</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                   
-                  </div>
-                </div>
-                <p>
-                  This resume website is built using pure HTML and CSS with a nostalgic diary-style design.
-                </p>
-                <a href="https://jharishav99.github.io/resume_website/">Preview</a>
-              </div>
-              <div class="project-card glass-card">
-                <div class="project-header">
-                  <h3>Studyz</h3>
-                  <div class="project-tech">
-                    <span class="tech-tag">HTML</span>
-                    <span class="tech-tag">CSS</span>
-                    <span class="tech-tag">JS</span>
-                   
-                  </div>
-                </div>
-                <p>
-                  Studyz is a modern and minimal landing page crafted for educational platforms.
-                </p>
-               <a href="https://studyz-ten.vercel.app/">Preview</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Honors & Hobbies Section -->
-    <section id="achievements" class="section">
-      <div class="container">
-        <div class="achievements-grid">
-          <div class="achievement-section">
-            <div class="terminal-window">
-              <div class="terminal-header-bar">
-                <div class="terminal-buttons">
-                  <span class="btn-close"></span>
-                  <span class="btn-minimize"></span>
-                  <span class="btn-maximize"></span>
-                </div>
-                <div class="terminal-title">honors.sh</div>
-              </div>
-              <div class="terminal-body">
-                <div class="section-header">
-                  <h2 class="section-title">Honors & Awards</h2>
-                  <div class="terminal-line">
-                    <span class="terminal-prompt">rishav@portfolio:~$</span> cat
-                    honors.txt
-                  </div>
-                </div>
-                <div class="honor-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                  <div class="honor-item glass-card">
-                    <h3>Study in India Scholarship</h3>
-                    <p>Got Full Scholarship from Indian Government under Study in India (SII) for B.TECH CSE at KIIT University.</p>
-                  </div>
+                <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/ShopForHome"
+                class="proj-link demo"
+                target="_blank"
+                >🌐 Live </a
+                >
+                <a
+                href="https://github.com/jharishav99/ShopForHome"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+                >
                
+            </div>
+            </div>
+            
+
+            <!-- Studyz -->
+            <div class="showcase-card">
+              <div class="showcase-image-wrapper">
+                <img
+                  src="s.png"
+                  alt="Studyz - Education Platform"
+                  class="showcase-image"
+                />
+                <div class="showcase-overlay">
+                  <h3>Studyz</h3>
+                  <p>Modern Education Landing Page</p>
                 </div>
               </div>
+              <div class="showcase-details">
+                <h4>Studyz</h4>
+                <div class="tech-stack-mini">
+                  <span class="tech-tag-mini">HTML</span>
+                  <span class="tech-tag-mini">CSS</span>
+                  <span class="tech-tag-mini">JavaScript</span>
+                </div>
+                
+              </div>
+                <div class="project-links">
+              <a
+                href="https://studyz-ten.vercel.app/"
+                class="proj-link demo"
+                target="_blank"
+                >🌐 Live</a
+              >
+              <a
+                href="https://github.com/jharishav99/Studyz"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+            </div>
+
+            <!-- Diary Portfolio -->
+            <div class="showcase-card">
+              <div class="showcase-image-wrapper">
+                <img
+                  src="d.png"
+                  alt="Dairy Portfolio - Resume Website"
+                  class="showcase-image"
+                />
+                <div class="showcase-overlay">
+                  <h3>Dairy Portfolio</h3>
+                  <p>Minimalist Portfolio Website</p>
+                </div>
+              </div>
+              <div class="showcase-details">
+                <h4>Dairy Portfolio</h4>
+                <div class="tech-stack-mini">
+                  <span class="tech-tag-mini">HTML</span>
+                  <span class="tech-tag-mini">CSS</span>
+                  <span class="tech-tag-mini">JavaScript</span>
+                </div>
+              </div>
+               <div class="project-links">
+              <a
+                href="https://jharishav99.github.io/resume_website/"
+                class="proj-link demo"
+                target="_blank"
+                >🌐 Live</a
+              >
+              <a
+                href="https://github.com/jharishav99/resume_website"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+            </div>
+
+            <!-- Transport Management System -->
+            <div class="showcase-card showcase-card--team">
+              <div class="team-badge">👥 Team Project</div>
+              <div class="showcase-image-wrapper">
+                <img
+                  src="t.png"
+                  alt="Transport Management - Fleet Management System"
+                  class="showcase-image"
+                />
+                <div class="showcase-overlay">
+                  <h3>Transport Management</h3>
+                  <p>Fleet & Logistics System</p>
+                </div>
+              </div>
+              <div class="showcase-details">
+                <h4>Transport Management <span class="team-label">👥</span></h4>
+                <div class="tech-stack-mini">
+                  <span class="tech-tag-mini">ASP.NET Core</span>
+                  <span class="tech-tag-mini">C#</span>
+                  <span class="tech-tag-mini">SQL Server</span>
+
+                </div>
+                
+              </div>
+              <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Transport-Management"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+            </div>
+            
+          </div>
+          
+        </div>
+
+        <!-- PROJECT FILTER -->
+        <div class="project-filter-section reveal">
+          <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">
+              All Projects
+            </button>
+            <button class="filter-btn" data-filter="dotnet">.NET</button>
+            <button class="filter-btn" data-filter="frontend">Frontend</button>
+            <button class="filter-btn" data-filter="cpp">C++</button>
+            <button class="filter-btn" data-filter="python">
+              AI/ML & Python
+            </button>
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          <div class="project-card featured reveal" data-category="dotnet">
+            <!-- <div class="project-badge">✦ Featured Project</div> -->
+            <h3>MediTrack</h3>
+            <p>
+              MediTrack: A .NET 8 Web API for healthcare management. Features EF Core, Fluent API relationship mapping, and automated data seeding for Patients, Doctors, and Appointments.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">.NET 8</span>
+              <span class="tech-tag">Angular</span>
+              <span class="tech-tag">JWT</span>
+              <span class="tech-tag">EF Core</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">REST API</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/MediTrack"
+                class="proj-link demo"
+                target="_blank"
+                >🌐 Live Demo</a
+              >
+              <a
+                href="https://github.com/jharishav99/MediTrack"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
             </div>
           </div>
-          <div class="achievement-section">
-            <div class="terminal-window">
-              <div class="terminal-header-bar">
-                <div class="terminal-buttons">
-                  <span class="btn-close"></span>
-                  <span class="btn-minimize"></span>
-                  <span class="btn-maximize"></span>
-                </div>
-                <div class="terminal-title">hobbies.sh</div>
+
+          <div class="project-card reveal" data-category="dotnet">
+            <div class="team-badge-project">👥 Team Project</div>
+            <h3>Transport Management System</h3>
+            <p>
+              .NET backend system for managing transport logistics, routes, and
+              vehicle tracking. Collaborated with team to build scalable fleet
+              management solution.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">ASP.NET Core</span>
+              <span class="tech-tag">C#</span>
+              <span class="tech-tag">SQL Server</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Transport-Management"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="python">
+            <h3>Olympic Medal Prediction</h3>
+            <p>
+              ML model predicting Olympic medal counts using historical data,
+              socioeconomic factors, and ensemble learning.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Scikit-learn</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">XGBoost</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Olympic-Medal-Prediction"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal " data-category="python">
+            <h3>Amazon Recommendation System</h3>
+            <p>
+              Collaborative filtering + content-based recommendation engine with
+              NLP-powered review analysis.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">NLTK</span>
+              <span class="tech-tag">Pandas</span>
+              <span class="tech-tag">Surprise</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Amazon-Recommended-sys"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="python">
+            <h3>Face Recognition System</h3>
+            <p>
+              Real-time face detection and recognition using deep learning with
+              OpenCV for attendance automation.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">Deep Learning</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Face-Recognition-System"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="python">
+            <h3>Word2Vec NLP Model</h3>
+            <p>
+              Custom Word2Vec implementation for semantic similarity and word
+              embeddings on domain-specific corpora.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Gensim</span>
+              <span class="tech-tag">NLTK</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Word2Vec"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="python">
+            <h3>Invisible Cloak (OpenCV)</h3>
+            <p>
+              Harry Potter-inspired real-time invisibility effect using color
+              detection and background subtraction.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">NumPy</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Invisible-Cloak"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="frontend">
+            <h3>Diary Portfolio Website</h3>
+            <p>
+              Minimalist diary-style personal portfolio with handwritten
+              aesthetic and smooth page-turn animations.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://jharishav99.github.io/resume_website/"
+                class="proj-link demo"
+                target="_blank"
+                >🌐 Live</a
+              >
+              <a
+                href="https://github.com/jharishav99/resume_website"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="frontend">
+            <h3>Studyz</h3>
+            <p>
+              Studyz is a modern and minimal landing page crafted for
+              educational platforms. Built using only HTML and CSS, it offers a
+              smooth and engaging first impression with a book-themed design,
+              simple navigation, and responsive layout.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://studyz-ten.vercel.app/"
+                class="proj-link demo"
+                target="_blank"
+                >🌐 Live</a
+              >
+              <a
+                href="https://github.com/jharishav99/Studyz"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="dotnet">
+            <h3>Task Management System</h3>
+            <p>
+              Full-featured task management application built with TypeScript
+              and modern frontend technologies. Supports task creation,
+              assignment, progress tracking, and team collaboration.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">TypeScript</span>
+              <span class="tech-tag">React</span>
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">MongoDB</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Task-Management-System"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="cpp">
+            <h3>Registration & Login Form</h3>
+            <p>
+              Console-based login and registration system using C++. Allows
+              users to create accounts, authenticate with credentials, and
+              recover forgotten passwords. Utilizes file handling to store user
+              data securely in text files and applies OOP principles.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">File Handling</span>
+              <span class="tech-tag">OOP</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Registration-Login-Form"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="cpp">
+            <h3>Strong Password Generator</h3>
+            <p>
+              Random Password Generator developed in C++ that allows users to
+              generate strong, random passwords of any desired length.
+              Console-based application using fundamental C++ concepts such as
+              strings, loops, and random number generation.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">Random Generation</span>
+              <span class="tech-tag">String Manipulation</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Password-Generator"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+
+          <div class="project-card reveal" data-category="cpp">
+            <h3>Library Management System</h3>
+            <p>
+              Console-based Book Management System developed in C++ using file
+              handling and object-oriented programming (OOP) concepts. Manages
+              book collections by allowing users to add new books, view all
+              books, and extract details of specific books using ID.
+            </p>
+            <div class="tech-stack">
+              <span class="tech-tag">C++</span>
+              <span class="tech-tag">File Handling</span>
+              <span class="tech-tag">OOP</span>
+            </div>
+            <div class="project-links">
+              <a
+                href="https://github.com/jharishav99/Library-Management-System"
+                class="proj-link gh"
+                target="_blank"
+                >⌥ GitHub</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- SHOW MORE PROJECTS BUTTON -->
+        <div class="show-more-container reveal">
+          <button id="showMoreBtn" class="btn-show-more">
+            <span class="show-more-text">Show More Projects</span>
+            <span class="show-more-icon">↓</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PUBLICATIONS — Updated with two-column layout
+         ============================================================ -->
+    <section id="publications">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">06 — research</div>
+          <h2 class="section-title"><em>Publications</em></h2>
+        </div>
+
+        <!-- Two-column publications layout -->
+        <div class="pub-columns reveal">
+          <!-- LEFT COLUMN: IEEE Published Papers -->
+          <div class="pub-column">
+            <h3 class="pub-column-heading">Research Papers</h3>
+
+            <div class="pub-item">
+              <div class="pub-num">PAPER 01 · IEEE</div>
+              <div class="pub-title">
+                Deep Learnings for Financial Sentiment Analysis
               </div>
-              <div class="terminal-body">
-                <div class="section-header">
-                  <h2 class="section-title">Hobbies</h2>
-                  <div class="terminal-line">
-                    <span class="terminal-prompt">rishav@portfolio:~$</span> ls
-                    hobbies/
-                  </div>
-                </div>
-                <div class="hobbies-grid">
-                  <div class="hobby-item glass-card">Standup Comedy</div>
-                  <div class="hobby-item glass-card">Guitar</div>
-                  <div class="hobby-item glass-card">Swimming</div>
-                  <div class="hobby-item glass-card">Cycling</div>
-                  <div class="hobby-item glass-card">Chess</div>
-                </div>
+              <a
+                class="pub-link"
+                href="https://ieeexplore.ieee.org/document/10962717"
+                target="_blank"
+                >→ View on IEEE Xplore</a
+              >
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-num">PAPER 02 · IEEE</div>
+              <div class="pub-title">
+                Deep Learning Architectures for Multimodal Sentiment Analysis
               </div>
+              <a
+                class="pub-link"
+                href="https://ieeexplore.ieee.org/document/11052112"
+                target="_blank"
+                >→ View on IEEE Xplore</a
+              >
+            </div>
+
+            <div class="pub-item">
+              <div class="pub-num">PAPER 03 · IEEE</div>
+              <div class="pub-title">
+                Leveraging Deep Learning for Sentiment Analysis in Nepali
+                Language Literature
+              </div>
+              <span class="pub-processing">[Journal Paper]</span>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: Conclave / Other Papers -->
+          <div class="pub-column">
+            <h3 class="pub-column-heading pub-column-heading--conclave">
+              Conclave Papers
+            </h3>
+
+            <div class="pub-item pub-item--conclave">
+              <div class="pub-num pub-num--conclave">PAPER 01 · BOOK</div>
+              <div class="pub-title">
+                Cultural Practices and Environmental Adaptations in Nepal's Hill
+                Communities
+              </div>
+              <span class="pub-badge pub-badge--book">Book</span>
+            </div>
+
+            <div class="pub-item pub-item--conclave">
+              <div class="pub-num pub-num--conclave">PAPER 02 · BOOK</div>
+              <div class="pub-title">
+                Navigating Growth, Urbanization, and Debt: A Multidimensional
+                Analysis of Nepal's Economic Transformation (2010–2022)
+              </div>
+              <span class="pub-badge pub-badge--book">Book</span>
+            </div>
+
+            <div class="pub-item pub-item--conclave">
+              <div class="pub-num pub-num--conclave">PAPER 03 · BOOK</div>
+              <div class="pub-title">
+                Everyday Life in Nepal's Hill Communities: An Exploration of
+                Cultural Practices and Environmental Adaptations
+              </div>
+              <span class="pub-badge pub-badge--book">Book</span>
+            </div>
+          </div>
+        </div>
+        <!-- End two-column layout -->
+      </div>
+    </section>
+
+    <!-- GITHUB STATS
+    <section id="github">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">07 — open source</div>
+          <h2 class="section-title">GitHub <em>Activity</em></h2>
+        </div>
+        <div class="github-grid reveal">
+          <div class="gh-stat">
+            <div class="gh-num">30+</div>
+            <div class="gh-desc">Repositories</div>
+          </div>
+          <div class="gh-stat">
+            <div class="gh-num">500+</div>
+            <div class="gh-desc">Contributions</div>
+          </div>
+          <div class="gh-stat">
+            <div class="gh-num">8+</div>
+            <div class="gh-desc">Projects Deployed</div>
+          </div>
+          <div class="gh-stat">
+            <div class="gh-num">3</div>
+            <div class="gh-desc">IEEE Papers</div>
+          </div>
+        </div>
+        <div class="lang-section reveal">
+          <div class="lang-section-title">Top Languages by Usage</div>
+          <div class="lang-row">
+            <span class="lang-name">C# / .NET</span>
+            <div class="lang-bar">
+              <div class="lang-fill" data-pct="85"></div>
+            </div>
+            <span class="lang-pct">85%</span>
+          </div>
+          <div class="lang-row">
+            <span class="lang-name">Python</span>
+            <div class="lang-bar">
+              <div class="lang-fill" data-pct="80"></div>
+            </div>
+            <span class="lang-pct">80%</span>
+          </div>
+          <div class="lang-row">
+            <span class="lang-name">TypeScript</span>
+            <div class="lang-bar">
+              <div class="lang-fill" data-pct="70"></div>
+            </div>
+            <span class="lang-pct">70%</span>
+          </div>
+          <div class="lang-row">
+            <span class="lang-name">JavaScript</span>
+            <div class="lang-bar">
+              <div class="lang-fill" data-pct="60"></div>
+            </div>
+            <span class="lang-pct">60%</span>
+          </div>
+          <div class="lang-row">
+            <span class="lang-name">C++</span>
+            <div class="lang-bar">
+              <div class="lang-fill" data-pct="50"></div>
+            </div>
+            <span class="lang-pct">50%</span>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem" class="reveal">
+          <a
+            href="https://github.com/jharishav99"
+            target="_blank"
+            class="btn-outline"
+            >View GitHub Profile →</a
+          >
+        </div>
+      </div>
+    </section> -->
+
+    <!-- CONFERENCE GALLERY -->
+    <section id="conference-gallery">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">07 — conference highlights</div>
+          <h2 class="section-title">Presenting at <em> Conferences</em></h2>
+          <p style="text-align: center; color: var(--ink-light); font-size: 1rem; max-width: 700px; margin: 0 auto 3rem;">
+            IEEE presentations, research paper sessions at KIIT & IIT Bhubaneswar, and keynote speeches on AI/ML and Sustainable Energy Economics
+          </p>
+        </div>
+
+        <div class="gallery-grid reveal">
+          <!-- Gallery Item 1 -->
+          <div class="gallery-item">
+            <img src="abcde.jpg" alt="Research presentation at KIIT" />
+            <div class="gallery-overlay">
+              <h4>IIT BBSR</h4>
+              <p></p>
+            </div>
+          </div>
+<!-- Gallery Item 3 -->
+          <div class="gallery-item">
+            <img src="iit_main (5).jpg" alt="Paper presentation session" />
+            <div class="gallery-overlay">
+              <h4>Paper Presentation Session</h4>
+              <p>Sentiment Analysis Research</p>
+            </div>
+          </div>
+          <!-- Gallery Item 2 -->
+          <div class="gallery-item">
+            <img src="iit_main (4).jpg" alt="Keynote at KIIT Conference" />
+            <div class="gallery-overlay">
+              <h4>KIIT Conference </h4>
+              <p>AI & Machine Learning Research</p>
+            </div>
+          </div>
+
+          
+
+          <!-- Gallery Item 4 -->
+          <div class="gallery-item">
+            <img src="iit_main (7).jpg" alt="ESIC 2025 IEEE Conference" />
+            <div class="gallery-overlay">
+              <h4>ESIC 2025 Delegate</h4>
+              <p>Financial Sentiment Analysis</p>
+            </div>
+          </div>
+ <!-- Gallery Item 6 -->
+          <div class="gallery-item">
+            <img src="iit_main (3).jpg" alt="Research paper publication" />
+            <div class="gallery-overlay">
+              <h4>Published Research</h4>
+              <p>Nepal's Economic Transformation Analysis</p>
+            </div>
+          </div>
+          <!-- Gallery Item 5 -->
+          <div class="gallery-item">
+            <img src="iit_main (8).jpg" alt="IIT Bhubaneswar sustainable energy" />
+            <div class="gallery-overlay">
+              <h4>Paper Presentation</h4>
+              <p>AI/ML Research</p>
+            </div>
+          </div>
+
+         
+        </div>
+
+        <div class="conference-stats reveal" style="margin-top: 4rem;">
+          <div class="conf-stat-item">
+            <div class="conf-stat-num">3+</div>
+            <div class="conf-stat-label"> Conferences</div>
+          </div>
+          <div class="conf-stat-item">
+            <div class="conf-stat-num">6+</div>
+            <div class="conf-stat-label">Research Papers</div>
+          </div>
+          <div class="conf-stat-item">
+            <div class="conf-stat-num">20/180</div>
+            <div class="conf-stat-label">Top Papers Selected</div>
+          </div>
+          <div class="conf-stat-item">
+            <div class="conf-stat-num">IEEE</div>
+            <div class="conf-stat-label">Published & Indexed</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">08 — certifications</div>
+          <h2 class="section-title">Certified <em>Skills</em></h2>
+        </div>
+        <div class="cert-filters reveal">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="ai">AI / ML</button>
+          <button class="filter-btn" data-filter="web">Web Dev</button>
+          <button class="filter-btn" data-filter="cloud">Cloud</button>
+          <button class="filter-btn" data-filter="prog">Programming</button>
+        </div>
+
+        <!-- PHOTO CARD CERTIFICATES GRID -->
+        <div class="cert-photo-grid reveal" id="certsGrid">
+
+          <!-- 1. AI Tools Workshop -->
+          <div class="cert-photo-card" data-cat="ai">
+            <div class="cert-photo-wrap">
+              <img src="ai.png" alt="AI Tools Workshop" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge ai">AI / ML</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">AI Tools Workshop</div>
+              <div class="cert-photo-provider">be10X · April 2026</div>
+            </div>
+          </div>
+
+          <!-- 2. AWS Academy -->
+          <div class="cert-photo-card" data-cat="cloud">
+            <div class="cert-photo-wrap">
+              <img src="aws.png" alt="AWS Academy Cloud" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge cloud">Cloud</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">AWS Academy Introduction to Cloud</div>
+              <div class="cert-photo-provider">Amazon AWS · April 2024</div>
+            </div>
+          </div>
+
+          <!-- 3. Data Analysis -->
+          <div class="cert-photo-card" data-cat="ai">
+            <div class="cert-photo-wrap">
+              <img src="lnkd.png" alt="Data Analysis Certificate" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge ai">AI / ML</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">Career Essentials in Data Analysis</div>
+              <div class="cert-photo-provider">Microsoft & LinkedIn · May 2024</div>
+            </div>
+          </div>
+
+          <!-- 4. Full Stack Java -->
+          <div class="cert-photo-card" data-cat="web">
+            <div class="cert-photo-wrap">
+              <img src="fsd.png" alt="Full Stack Java" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge web">Web Dev</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">Full Stack Development in Java</div>
+              <div class="cert-photo-provider">Coding Club India · Apr–Jun 2024</div>
+            </div>
+          </div>
+
+          <!-- 5. Python ML -->
+          <div class="cert-photo-card" data-cat="ai">
+            <div class="cert-photo-wrap">
+              <img src="ml.png" alt="Python ML" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge ai">AI / ML</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">Python & Machine Learning</div>
+              <div class="cert-photo-provider">Coding Club India · May–Jul 2024</div>
+            </div>
+          </div>
+
+          <!-- 6. Data Science -->
+          <div class="cert-photo-card" data-cat="ai">
+            <div class="cert-photo-wrap">
+              <img src="ds.png" alt="Data Science Bootcamp" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge ai">AI / ML</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">Data Science Bootcamp</div>
+              <div class="cert-photo-provider">GeeksforGeeks</div>
+            </div>
+          </div>
+
+          <!-- 7. MongoDB -->
+          <div class="cert-photo-card" data-cat="prog">
+            <div class="cert-photo-wrap">
+              <img src="mongo.png" alt="MongoDB Toolkit" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge prog">Programming</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">MongoDB Developer's Toolkit</div>
+              <div class="cert-photo-provider">GeeksforGeeks</div>
+            </div>
+          </div>
+
+          <!-- 8. Hackathon -->
+          <div class="cert-photo-card" data-cat="prog">
+            <div class="cert-photo-wrap">
+              <img src="imp.png" alt="Hackathon Certificate" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge prog">Programming</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">ILLUMINATE Hackathon</div>
+              <div class="cert-photo-provider">Code the Stars · October 2024</div>
+            </div>
+          </div>
+
+          <!-- 9. Python Course -->
+          <div class="cert-photo-card" data-cat="prog">
+            <div class="cert-photo-wrap">
+              <img src="py.png" alt="Python Course" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge prog">Programming</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">The Complete Python Programming Course</div>
+              <div class="cert-photo-provider">Udemy · May 2024</div>
+            </div>
+          </div>
+
+          <!-- 10. Business Analyst -->
+          <div class="cert-photo-card" data-cat="prog">
+            <div class="cert-photo-wrap">
+              <img src="ba.png" alt="Business Analyst" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge prog">Programming</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">Business Analyst Certification</div>
+              <div class="cert-photo-provider">Agile Enterprise Coach · May 2024</div>
+            </div>
+          </div>
+
+          <!-- 11. SQL -->
+          <div class="cert-photo-card" data-cat="prog">
+            <div class="cert-photo-wrap">
+              <img src="sql.png" alt="SQL Certificate" class="cert-img">
+              <div class="cert-photo-overlay">
+                <span class="cert-photo-badge prog">Programming</span>
+              </div>
+            </div>
+            <div class="cert-photo-info">
+              <div class="cert-photo-title">SQL – Complete Introduction to SQL</div>
+              <div class="cert-photo-provider">Udemy · May 2024</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="show-more-container reveal">
+          <button id="showMoreCertsBtn" class="btn-show-more">
+            <span class="show-more-text">Show More Certificates</span>
+            <span class="show-more-icon">↓</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="certModal">
+      <div class="modal-box">
+        <div class="modal-icon" id="modalIcon"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div
+          style="
+            font-size: 0.85rem;
+            color: var(--ink-light);
+            margin-top: 0.4rem;
+          "
+          id="modalProvider"
+        ></div>
+        <button class="modal-close" id="modalClose">Close</button>
+      </div>
+    </div>
+
+    <!-- AWARDS -->
+    <section id="awards">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-eyebrow">09 — honors</div>
+          <h2 class="section-title">Awards & <em>Recognition</em></h2>
+        </div>
+        <div class="award-card reveal">
+          <div class="award-symbol">🏆</div>
+          <div>
+            <div class="award-title">
+              Top 20 Paper — IIT Bhubaneswar ( International Conference on
+              Sustainable Energy Economics in the Asia-Pacific Region)
+            </div>
+            <div class="award-desc">
+              Selected as one of the Top 20 research papers out of 180
+              submissions at the 2nd International Conference on Sustainable
+              Energy Economics in the Asia-Pacific Region.
+            </div>
+          </div>
+        </div>
+        <div class="award-card reveal">
+          <div class="award-symbol">🎤</div>
+          <div>
+            <div class="award-title">
+              Top 24 Finalist — Comedy Champion Season 2 (Nepal's Largest
+              Stand-up Competition)
+            </div>
+            <div class="award-desc">
+              Participated in Nepal's largest stand-up comedy competition,
+              competing against more than 7,000 contestants nationwide.
+              Successfully advanced through three highly competitive audition
+              rounds, each tougher than the previous, and secured a place among
+              the Top 24 finalists in the country. Audition featured on OSR
+              Reality YouTube (2.56M subscribers).
+            </div>
+          </div>
+        </div>
+        <div class="award-card reveal">
+          <div class="award-symbol">🎓</div>
+          <div>
+            <div class="award-title">Study in India Scholarship</div>
+            <div class="award-desc">
+              Got Full Scholarship from Indian Government under Study in India
+              (SII) for B.TECH CSE at KIIT University, Bhubaneswar, Odisha
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section">
+    <!-- STAND-UP COMEDY SHOWCASE -->
+    <section id="comedy" style="background: var(--deep); padding: 6rem 0">
       <div class="container">
-        <div class="contact-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-          <!-- Get In Touch Terminal -->
-          <div class="terminal-window contact-box">
-            <div class="terminal-header-bar">
-              <div class="terminal-buttons">
-                <span class="btn-close"></span>
-                <span class="btn-minimize"></span>
-                <span class="btn-maximize"></span>
-              </div>
-              <div class="terminal-title">get-in-touch.sh</div>
+        <div class="reveal" style="text-align: center; margin-bottom: 1rem">
+          <div class="section-eyebrow" style="justify-content: center">
+            10 — beyond the screen
+          </div>
+          <h2 class="section-title">Stand-up <em>Comedy</em></h2>
+          <p
+            style="
+              font-size: 1rem;
+              color: var(--ink-light);
+              max-width: 560px;
+              margin: 1rem auto 2.5rem;
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            When I'm not shipping code or publishing research, I'm on stage
+            making hundreds of people laugh. Comedy is my second superpower.
+          </p>
+        </div>
+
+        <!-- NATIONAL CHAMPION HIGHLIGHT CARD -->
+        <div class="comedy-champion-card reveal">
+          <div class="champ-glow"></div>
+          <div class="champ-left">
+            <div class="champ-trophy">🏆</div>
+            <div class="champ-badge-row">
+              <span class="champ-badge">🎭 National Competition</span>
+              <span class="champ-badge champ-badge--gold"
+                >Top 24 Finalists</span
+              >
             </div>
-            <div class="terminal-body">
-              <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <div class="terminal-line">
-                  <span class="terminal-prompt">rishav@portfolio:~$</span>
-                  ./connect.sh
-                </div>
+            <h3 class="champ-title">Comedy Champion <em>Season 2</em></h3>
+            <p class="champ-desc">
+              Competed in Nepal's biggest stand-up comedy competition with over
+              <strong>7,000 participants</strong> nationwide. Survived 3
+              grueling rounds of auditions — each more competitive than the last
+              — and earned a coveted spot in the
+              <strong>Top 24 finalists</strong> out of the entire country.
+            </p>
+            <div class="champ-stats">
+              <div class="champ-stat">
+                <div class="champ-stat-num">7,000+</div>
+                <div class="champ-stat-lbl">Participants</div>
               </div>
-              <div class="contact-info">
-                <div class="contact-item">
-                  <h3>Email</h3>
-                  <a href="mailto:jharishav99@gmail.com" class="contact-link"
-                    >jharishav99@gmail.com</a
-                  >
-                </div>
-                <div class="social-links">
-                  <a
-                    href="https://www.linkedin.com/in/jharishav99/"
-                    target="_blank"
-                    class="social-link"
-                    >LinkedIn</a
-                  >
-                  <a
-                    href="https://github.com/jharishav99"
-                    target="_blank"
-                    class="social-link"
-                    >GitHub</a
-                  >
-                  <a
-                    href="https://www.instagram.com/jharishav__"
-                    target="_blank"
-                    class="social-link"
-                    >Instagram</a
-                  >
-                  <a
-                    href="https://www.facebook.com/jharishav99/"
-                    target="_blank"
-                    class="social-link"
-                    >Facebook</a
-                  >
-                </div>
+              <div class="champ-stat">
+                <div class="champ-stat-num">3</div>
+                <div class="champ-stat-lbl">Rounds Cleared</div>
               </div>
+              <div class="champ-stat">
+                <div class="champ-stat-num">Top 24</div>
+                <div class="champ-stat-lbl">Nationally</div>
+              </div>
+            </div>
+            <div class="champ-yt-note">
+              📺 My audition clip was featured on
+              <strong>OSR Reality</strong> YouTube channel
             </div>
           </div>
-          <!-- Research & Coding Profiles Terminal -->
-          <div class="terminal-window contact-box profiles-sh">
-            <div class="terminal-header-bar">
-              <div class="terminal-buttons">
-                <span class="btn-close"></span>
-                <span class="btn-minimize"></span>
-                <span class="btn-maximize"></span>
-              </div>
-              <div class="terminal-title">profiles.sh</div>
+          <div class="champ-right">
+            <img
+              src="comedy1.jpg"
+              alt="Comedy Champion Season 2"
+              class="champ-img"
+            />
+          </div>
+        </div>
+
+        <!-- COMEDY 2x2 PHOTO GRID -->
+        <!-- <div class="comedy-mosaic reveal">
+          <div class="mosaic-label">📸 On Stage — Across 3+ Years</div>
+          <div class="comedy-grid-2x2">
+            <div class="comedy-grid-cell">
+              <img src="comedy3.jpeg" alt="Rishav on mic close-up" />
             </div>
-            <div class="terminal-body">
-              <div class="section-header">
-                <h3 class="section-title" style="font-size:1.1rem;">Research & Coding Profiles</h3>
-                <div class="terminal-line">
-                  <span class="terminal-prompt">rishav@portfolio:~$</span>
-                  open profiles.txt
+            <div class="comedy-grid-cell">
+              <img src="comedy1.jpg" alt="Comedy Champion backstage" />
+            </div>
+            <div class="comedy-grid-cell">
+              <img src="qwe.jpeg" alt="Performing to crowd" />
+            </div>
+            <div class="comedy-grid-cell">
+              <img
+                src="abc.jpeg"
+                alt="Night stage show"
+                style="object-position: 70% top"
+              />
+            </div>
+          </div>
+        </div> -->
+
+        <div class="photo-row">
+          <img src="comedy3.jpeg" alt="Photo 1" />
+          <img src="comedy2.png" alt="Photo 2" />
+          <img src="qwe.jpeg" alt="Photo 3" />
+          <img src="abc.jpeg" alt="Photo 4" />
+        </div>
+
+        <!-- YOUTUBE HERO CARD — BIG HIGHLIGHT -->
+        <div class="yt-hero-card reveal">
+          <div class="yt-hero-glow"></div>
+          <div class="yt-hero-badge">
+            <svg viewBox="0 0 24 24" fill="#FF0000" width="28" height="28">
+              <path
+                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+              />
+            </svg>
+            <div class="yt-hero-channel">
+              <span class="yt-channel-name">OSR Reality</span>
+              <span class="yt-channel-sub">✓ 2.56M subscribers</span>
+            </div>
+            <div class="yt-hero-pill">FEATURED ON</div>
+          </div>
+          <div class="yt-hero-body">
+            <div class="yt-hero-thumb-wrap">
+              <img
+                src="comedy_yt.png"
+                alt="Comedy Champion YouTube"
+                class="yt-hero-thumb"
+              />
+              <div class="yt-play-btn">
+                <svg viewBox="0 0 24 24" fill="white" width="36" height="36">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <div class="yt-hero-duration">53:27</div>
+            </div>
+            <div class="yt-hero-info">
+              <div class="yt-hero-show-tag">Comedy Champion Season 2</div>
+              <h3 class="yt-hero-title">Episode 3 — Physical Audition</h3>
+              <p class="yt-hero-desc">
+                My stand-up set was featured in Nepal's biggest comedy
+                competition show, broadcast to millions on YouTube. Over 7,000
+                participants. I made it to the Top 24 nationally.
+              </p>
+              <div class="yt-hero-stats">
+                <div class="yt-hero-stat">
+                  <span class="yt-stat-num">18K</span>
+                  <span class="yt-stat-lbl">👍 Likes</span>
+                </div>
+                <div class="yt-hero-stat">
+                  <span class="yt-stat-num">884k</span>
+                  <span class="yt-stat-lbl">📺 Views</span>
+                </div>
+                <div class="yt-hero-stat">
+                  <span class="yt-stat-num">Top 24</span>
+                  <span class="yt-stat-lbl">🏆 Nationally</span>
                 </div>
               </div>
-              <div class="social-links" style="flex-wrap: wrap;">
-                <!-- Research Profiles -->
-                <a href="https://www.semanticscholar.org/author/Rishav-Jha/2355613965" target="_blank" class="social-link glass-card">
-                  Semantic Scholar
-                </a>
-                <a href="https://scholar.google.com/citations?hl=en&user=KLC6tsgAAAAJ" target="_blank" class="social-link glass-card">
-                  Google Scholar
-                </a>
-                <!-- Coding Profiles -->
-                <a href="https://leetcode.com/u/jharishav99/" target="_blank" class="social-link glass-card">
-                  LeetCode
-                </a>
-                <a href="https://www.hackerrank.com/profile/jharishav99/activity" target="_blank" class="social-link glass-card">
-                  HackerRank
-                </a>
-                <a href="https://www.interviewbit.com/profile/jharishav99/" target="_blank" class="social-link glass-card">
-                  InterviewBit
-                </a>
-                <a href="https://www.codechef.com/users/jharishav99" target="_blank" class="social-link glass-card">
-                  CodeChef
-                </a>
-                <a href="https://codolio.com/profile/jharishav99" target="_blank" class="social-link glass-card">
-                  Codolio
-                </a>
-              </div>
+              <!-- <a href="#" class="yt-hero-watch-btn">
+                <svg viewBox="0 0 24 24" fill="white" width="16" height="16">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                Watch on YouTube
+              </a> -->
             </div>
           </div>
         </div>
-        <!-- contacts.sh Terminal in a new row below -->
-        <div style="margin-top:2rem; max-width:700px; margin-left:auto; margin-right:auto;">
-          <div class="terminal-window">
-            <div class="terminal-header-bar">
-              <div class="terminal-buttons">
-                <span class="btn-close"></span>
-                <span class="btn-minimize"></span>
-                <span class="btn-maximize"></span>
-              </div>
-              <div class="terminal-title">contact.sh</div>
+
+        <!-- HOBBIES ROW -->
+        <div style="margin-top: 4rem">
+          <h3
+            class="reveal"
+            style="
+              font-family: var(--font-serif);
+              font-size: 1.3rem;
+              color: var(--ink-light);
+              text-align: center;
+              margin-bottom: 1.5rem;
+              font-weight: 400;
+            "
+          >
+            Other <em>Passions</em>
+          </h3>
+
+          <div class="hobbies-row reveal">
+            <div class="hobby-item">
+              <span class="hobby-icon">🏔️</span>
+              <div class="hobby-name">Trekking</div>
+              <div class="hobby-sub">Himalayan trails</div>
             </div>
-            <div class="terminal-body">
-              <div class="terminal-output">
-                <p>$ echo "Let's build something amazing together!"</p>
-                <p class="output-text">
-                  Let's build something amazing together!
+
+            <div class="hobby-item">
+              <span class="hobby-icon">♟️</span>
+              <div class="hobby-name">Chess</div>
+              <div class="hobby-sub">Strategy & patience</div>
+            </div>
+            <div class="hobby-item">
+              <span class="hobby-icon">🚴</span>
+              <div class="hobby-name">Cycling</div>
+              <div class="hobby-sub">City & trail rides</div>
+            </div>
+            <div class="hobby-item">
+              <span class="hobby-icon">🎸</span>
+              <div class="hobby-name">Guitar</div>
+              <div class="hobby-sub">Acoustic & fingerpicking</div>
+            </div>
+            <div class="hobby-item">
+              <span class="hobby-icon">🏓</span>
+              <div class="hobby-name">Table Tennis</div>
+              <div class="hobby-sub">Fast reflexes & focus</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME SECTION -->
+    <section
+      id="resume-section"
+      style="background: var(--dark3); padding: 5rem 0"
+    >
+      <div class="container">
+        <div class="reveal" style="text-align: center; margin-bottom: 3rem">
+          <div class="section-eyebrow" style="justify-content: center">
+            10.5 — credentials
+          </div>
+          <h2 class="section-title">My <em>Resume</em></h2>
+          <p
+            style="
+              font-size: 1rem;
+              color: var(--ink-light);
+              max-width: 480px;
+              margin: 1rem auto 0;
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            Everything you need to know — one click away.
+          </p>
+        </div>
+        <div class="resume-card reveal">
+          <div class="resume-card-left">
+            <div class="resume-doc-preview">
+              <div class="rdp-page">
+                <div class="rdp-header">Rishav Jha</div>
+                <div class="rdp-line rdp-line--long"></div>
+                <div class="rdp-line rdp-line--med"></div>
+                <div class="rdp-line rdp-line--short"></div>
+                <div class="rdp-section">Experience</div>
+                <div class="rdp-line rdp-line--long"></div>
+                <div class="rdp-line rdp-line--med"></div>
+                <div class="rdp-section">Education</div>
+                <div class="rdp-line rdp-line--long"></div>
+                <div class="rdp-line rdp-line--med"></div>
+                <div class="rdp-section">Skills</div>
+                <div class="rdp-line rdp-line--long"></div>
+                <div class="rdp-line rdp-line--short"></div>
+              </div>
+            </div>
+          </div>
+          <div class="resume-card-right">
+            <h3 class="resume-card-title">
+              Rishav Jha — Full Stack &amp; AI Engineer
+            </h3>
+            <div class="resume-highlights">
+              <div class="rh-item">
+                <span class="rh-icon">🏢</span> Wipro — Project Engineer (March
+                2026–Present)
+              </div>
+              <div class="rh-item">
+                <span class="rh-icon">🎓</span> B.Tech CSE, KIIT University
+                (2021–2025)
+              </div>
+              <div class="rh-item">
+                <span class="rh-icon">📄</span> 2 IEEE Research Papers Published
+              </div>
+              <div class="rh-item">
+                <span class="rh-icon">💻</span> .NET · Angular · Python · AI/ML
+              </div>
+              <div class="rh-item">
+                <span class="rh-icon">🇳🇵</span> Nepali • Based in Bangalore
+              </div>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-top: 1.5rem;
+              "
+            >
+              <a
+                href="resume.pdf"
+                download="Rishav_Jha_Resume.pdf"
+                class="btn-primary resume-dl-btn"
+              >
+                ⬇ Download Resume (PDF)
+              </a>
+              <a
+                href="resume.pdf"
+                target="_blank"
+                class="btn-outline"
+                style="font-size: 0.85rem; padding: 0.75rem 1.5rem"
+              >
+                👁 View Online
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="reveal" style="text-align: center; margin-bottom: 4rem">
+          <div class="section-eyebrow" style="justify-content: center">
+            11 — hire me
+          </div>
+          <h2 class="section-title">Let's <em>Connect</em></h2>
+          <p
+            style="
+              font-size: 1rem;
+              color: var(--ink-light);
+              max-width: 520px;
+              margin: 0 auto;
+              font-weight: 300;
+              line-height: 1.7;
+            "
+          >
+            Open to opportunities — Let's build something impactful together 🚀
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="reveal contact-left">
+            <p class="contact-cta">Get in<br /><em>Touch.</em></p>
+            <div class="social-grid">
+              <a href="mailto:jharishav99@gmail.com" class="social-link">
+                <div class="s-icon" style="background: rgba(234, 67, 53, 0.12)">✉️</div>
+                <div>
+                  <div class="s-name">Email</div>
+                </div>
+              </a>
+              <a href="https://wa.me/918658567949" class="social-link" target="_blank">
+                <div class="s-icon" style="background: rgba(37, 211, 102, 0.15)">💬</div>
+                <div>
+                  <div class="s-name">WhatsApp</div>
+                </div>
+              </a>
+              <a href="https://linkedin.com/in/jharishav99" class="social-link" target="_blank">
+                <div class="s-icon" style="background: rgba(10, 102, 194, 0.15)">💼</div>
+                <div>
+                  <div class="s-name">LinkedIn</div>
+                </div>
+              </a>
+              <a href="https://github.com/jharishav99" class="social-link" target="_blank">
+                <div class="s-icon" style="background: rgba(240, 237, 232, 0.06)">⌥</div>
+                <div>
+                  <div class="s-name">GitHub</div>
+                </div>
+              </a>
+              <a href="https://www.instagram.com/jharishav__" class="social-link" target="_blank">
+                <div class="s-icon" style="background: rgba(240, 237, 232, 0.06)">📸</div>
+                <div>
+                  <div class="s-name">Instagram</div>
+                </div>
+              </a>
+              <a href="https://www.facebook.com/jharishav99" class="social-link" target="_blank">
+                <div class="s-icon" style="background: rgba(240, 237, 232, 0.06)">👥</div>
+                <div>
+                  <div class="s-name">Facebook</div>
+                </div>
+              </a>
+            </div>
+
+            <form class="contact-form" onsubmit="handleContact(event)">
+              <label>
+                <span>Your Name</span>
+                <input class="form-field" type="text" placeholder="Your Name" required />
+              </label>
+              <label>
+                <span>Your Email</span>
+                <input class="form-field" type="email" placeholder="Your Email" required />
+              </label>
+              <label>
+                <span>Subject</span>
+                <input class="form-field" type="text" placeholder="Subject" />
+              </label>
+              <label>
+                <span>Message</span>
+                <textarea
+                  class="form-field"
+                  placeholder="Your message... (or just say नमस्ते!)"
+                  rows="6"
+                ></textarea>
+              </label>
+              <button
+                type="submit"
+                class="btn-primary"
+                style="border: none; cursor: pointer"
+              >
+                Send Message 🚀
+              </button>
+            </form>
+          </div>
+
+          <div class="reveal contact-right">
+            <div
+              class="section-eyebrow"
+              style="margin-bottom: 1rem; font-size: 0.75rem"
+            >
+              Research Profiles
+            </div>
+            <div class="social-grid" style="margin-bottom: 2rem">
+              <a
+                href="https://scholar.google.com/citations?hl=en&user=KLC6tsgAAAAJ"
+                target="_blank"
+                class="social-link"
+              >
+                <div class="s-icon" style="background: rgba(66, 133, 244, 0.12)">📚</div>
+                <div>
+                  <div class="s-name">Google Scholar</div>
+                </div>
+              </a>
+              <a
+                href="https://www.semanticscholar.org/author/Rishav-Jha/2355613965"
+                target="_blank"
+                class="social-link"
+              >
+                <div class="s-icon" style="background: rgba(31, 135, 232, 0.12)">🔬</div>
+                <div>
+                  <div class="s-name">Semantic Scholar</div>
+                </div>
+              </a>
+            </div>
+
+            <div
+              class="section-eyebrow"
+              style="margin-bottom: 1rem; font-size: 0.75rem"
+            >
+              Coding Profiles
+            </div>
+            <div class="social-grid">
+              <a
+                href="https://leetcode.com/u/jharishav99/"
+                class="social-link"
+                target="_blank"
+              >
+                <div class="s-icon" style="background: rgba(255, 161, 22, 0.12)">💡</div>
+                <div>
+                  <div class="s-name">LeetCode</div>
+                </div>
+              </a>
+              <a
+                href="https://www.hackerrank.com/profile/jharishav99/activity"
+                class="social-link"
+                target="_blank"
+              >
+                <div class="s-icon" style="background: rgba(0, 180, 0, 0.08)">🏆</div>
+                <div>
+                  <div class="s-name">HackerRank</div>
+                </div>
+              </a>
+              <a
+                href="https://www.codechef.com/users/jharishav99"
+                class="social-link"
+                target="_blank"
+              >
+                <div class="s-icon" style="background: rgba(98, 61, 0, 0.12)">👨‍🍳</div>
+                <div>
+                  <div class="s-name">CodeChef</div>
+                </div>
+              </a>
+              <a
+                href="https://codolio.com/profile/jharishav99"
+                class="social-link"
+                target="_blank"
+              >
+                <div class="s-icon" style="background: rgba(100, 100, 255, 0.1)">🧩</div>
+                <div>
+                  <div class="s-name">Codolio</div>
+                </div>
+              </a>
+            </div>
+
+            <div class="buddha-meditation">
+              <svg
+                class="buddha-svg"
+                viewBox="0 0 300 400"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <!-- Tree trunk -->
+                <path
+                  d="M 150 80 Q 140 150 145 250 L 155 250 Q 160 150 150 80"
+                  fill="#8b6f47"
+                  opacity="0.8"
+                />
+
+                <!-- Tree branches -->
+                <path
+                  d="M 150 100 Q 100 80 80 60"
+                  stroke="#9b7f57"
+                  stroke-width="3"
+                  fill="none"
+                  opacity="0.7"
+                />
+                <path
+                  d="M 150 100 Q 200 80 220 60"
+                  stroke="#9b7f57"
+                  stroke-width="3"
+                  fill="none"
+                  opacity="0.7"
+                />
+                <path
+                  d="M 150 120 Q 90 110 60 90"
+                  stroke="#9b7f57"
+                  stroke-width="2.5"
+                  fill="none"
+                  opacity="0.7"
+                />
+                <path
+                  d="M 150 120 Q 210 110 240 90"
+                  stroke="#9b7f57"
+                  stroke-width="2.5"
+                  fill="none"
+                  opacity="0.7"
+                />
+
+                <!-- Tree foliage (green leaves) -->
+                <circle cx="120" cy="70" r="35" fill="#52b788" opacity="0.7" />
+                <circle cx="180" cy="70" r="35" fill="#52b788" opacity="0.7" />
+                <circle cx="90" cy="95" r="28" fill="#2d6a4f" opacity="0.75" />
+                <circle cx="210" cy="95" r="28" fill="#2d6a4f" opacity="0.75" />
+                <circle cx="150" cy="55" r="25" fill="#52b788" opacity="0.8" />
+
+                <!-- Roots -->
+                <path
+                  d="M 140 250 Q 120 270 110 280"
+                  stroke="#8b6f47"
+                  stroke-width="2"
+                  fill="none"
+                  opacity="0.6"
+                />
+                <path
+                  d="M 160 250 Q 180 270 190 280"
+                  stroke="#8b6f47"
+                  stroke-width="2"
+                  fill="none"
+                  opacity="0.6"
+                />
+
+                <!-- Buddha figure -->
+                <!-- Head -->
+                <circle cx="150" cy="160" r="18" fill="#d4a574" opacity="0.9" />
+
+                <!-- Face glow -->
+                <circle
+                  cx="150"
+                  cy="160"
+                  r="20"
+                  fill="none"
+                  stroke="#f5a94e"
+                  stroke-width="1"
+                  opacity="0.4"
+                />
+
+                <!-- Eyes (closed in meditation) -->
+                <line
+                  x1="145"
+                  y1="158"
+                  x2="147"
+                  y2="158"
+                  stroke="#8b6f47"
+                  stroke-width="1.5"
+                />
+                <line
+                  x1="153"
+                  y1="158"
+                  x2="155"
+                  y2="158"
+                  stroke="#8b6f47"
+                  stroke-width="1.5"
+                />
+
+                <!-- Serene expression mark -->
+                <path
+                  d="M 150 165 Q 148 167 150 168 Q 152 167 150 165"
+                  fill="#8b6f47"
+                  opacity="0.6"
+                />
+
+                <!-- Body (meditation pose) -->
+                <ellipse
+                  cx="150"
+                  cy="190"
+                  rx="20"
+                  ry="28"
+                  fill="#d4a574"
+                  opacity="0.85"
+                />
+
+                <!-- Robes -->
+                <path
+                  d="M 130 185 Q 125 210 128 240"
+                  stroke="#9b6f30"
+                  stroke-width="3"
+                  fill="none"
+                  opacity="0.7"
+                />
+                <path
+                  d="M 170 185 Q 175 210 172 240"
+                  stroke="#9b6f30"
+                  stroke-width="3"
+                  fill="none"
+                  opacity="0.7"
+                />
+
+                <!-- Legs (crossed) -->
+                <ellipse
+                  cx="145"
+                  cy="235"
+                  rx="8"
+                  ry="12"
+                  fill="#d4a574"
+                  opacity="0.8"
+                />
+                <ellipse
+                  cx="155"
+                  cy="235"
+                  rx="8"
+                  ry="12"
+                  fill="#d4a574"
+                  opacity="0.8"
+                />
+
+                <!-- Arms -->
+                <path
+                  d="M 130 188 Q 120 200 118 220"
+                  stroke="#d4a574"
+                  stroke-width="6"
+                  fill="none"
+                  opacity="0.8"
+                />
+                <path
+                  d="M 170 188 Q 180 200 182 220"
+                  stroke="#d4a574"
+                  stroke-width="6"
+                  fill="none"
+                  opacity="0.8"
+                />
+
+                <!-- Aura/Halo -->
+                <circle
+                  cx="150"
+                  cy="160"
+                  r="35"
+                  fill="none"
+                  stroke="#f5a94e"
+                  stroke-width="1.5"
+                  opacity="0.3"
+                  stroke-dasharray="5,5"
+                />
+
+               
+                <!-- Glow effect -->
+                <filter id="glow">
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+                  <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </feMerge>
+              </svg>
+
+              <div class="meditation-text">
+                <p
+                  style="
+                    font-family: var(--font-serif);
+                    font-size: 0.95rem;
+                    color: var(--gold-light);
+                    text-align: center;
+                    margin: 1.5rem 0 0.5rem;
+                    font-style: italic;
+                  "
+                >
+                  Finding Peace in Code
                 </p>
-                <p>$ exit</p>
+                <p
+                  style="
+                    font-size: 0.78rem;
+                    color: var(--ink-light);
+                    text-align: center;
+                    letter-spacing: 0.05em;
+                  "
+                >
+                  Like Buddha under the Bodhi tree,<br />we seek clarity and
+                  enlightenment<br />through mindful creation.
+                </p>
               </div>
             </div>
           </div>
@@ -621,23 +2751,500 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <p>
-          &copy; 2025 Rishav Jha. Built with passion and terminal aesthetics.
-        </p>
+   
+
+    <!-- EASTER EGG -->
+    <button class="code-hint" id="codeHint"><span>$</span> terminal</button>
+    <div class="easter-panel" id="easterPanel">
+      <div class="easter-bar">
+        <span>rishav@himalaya:~</span>
+        <button class="easter-close" id="easterClose">✕</button>
+      </div>
+      <div class="easter-body" id="easterBody">
+        <div class="e-out">
+          <span class="e-y">🏔️ Welcome to the Himalayan Terminal</span>
+        </div>
+        <div class="e-out">
+          <span class="e-r">Commands: </span
+          ><span class="e-w"
+            >help, whoami, joke, mountain, skills, hire, nepal, buddha</span
+          >
+        </div>
+      </div>
+      <div class="easter-input-row">
+        <span class="e-prompt">rishav@himalaya:~$</span>
+        <input
+          class="e-input"
+          id="easterInput"
+          placeholder="type a command..."
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a
+      href="https://wa.me/918658567949"
+      class="whatsapp-float"
+      target="_blank"
+      title="Chat on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+      <span class="whatsapp-float-label">Chat Now</span>
+    </a>
+
+    <!-- NEPALI DECORATIVE MANDALAS -->
+    <div class="nepali-deco-left" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="80" height="80" opacity="0.07">
+        <circle
+          cx="60"
+          cy="60"
+          r="55"
+          fill="none"
+          stroke="#d4a017"
+          stroke-width="1"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r="40"
+          fill="none"
+          stroke="#d4a017"
+          stroke-width="0.5"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r="25"
+          fill="none"
+          stroke="#e8820c"
+          stroke-width="1"
+        />
+        <circle cx="60" cy="60" r="10" fill="rgba(212,160,23,0.3)" />
+        <line
+          x1="60"
+          y1="5"
+          x2="60"
+          y2="115"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+        <line
+          x1="5"
+          y1="60"
+          x2="115"
+          y2="60"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+        <line
+          x1="21"
+          y1="21"
+          x2="99"
+          y2="99"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+        <line
+          x1="99"
+          y1="21"
+          x2="21"
+          y2="99"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+      </svg>
+    </div>
+    <div class="nepali-deco-right" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="80" height="80" opacity="0.07">
+        <circle
+          cx="60"
+          cy="60"
+          r="55"
+          fill="none"
+          stroke="#9b1b30"
+          stroke-width="1"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r="40"
+          fill="none"
+          stroke="#9b1b30"
+          stroke-width="0.5"
+        />
+        <text
+          x="60"
+          y="65"
+          text-anchor="middle"
+          fill="#9b1b30"
+          font-size="12"
+          font-family="serif"
+        >
+          ☸
+        </text>
+      </svg>
+    </div>
+
+    <canvas
+      id="globalSnowCanvas"
+      style="
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 998;
+        opacity: 0.55;
+      "
+    ></canvas>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+            <!-- Tree trunk -->
+            <path
+              d="M 150 80 Q 140 150 145 250 L 155 250 Q 160 150 150 80"
+              fill="#8b6f47"
+              opacity="0.8"
+            />
+
+            <!-- Tree branches -->
+            <path
+              d="M 150 100 Q 100 80 80 60"
+              stroke="#9b7f57"
+              stroke-width="3"
+              fill="none"
+              opacity="0.7"
+            />
+            <path
+              d="M 150 100 Q 200 80 220 60"
+              stroke="#9b7f57"
+              stroke-width="3"
+              fill="none"
+              opacity="0.7"
+            />
+            <path
+              d="M 150 120 Q 90 110 60 90"
+              stroke="#9b7f57"
+              stroke-width="2.5"
+              fill="none"
+              opacity="0.7"
+            />
+            <path
+              d="M 150 120 Q 210 110 240 90"
+              stroke="#9b7f57"
+              stroke-width="2.5"
+              fill="none"
+              opacity="0.7"
+            />
+
+            <!-- Tree foliage (green leaves) -->
+            <circle cx="120" cy="70" r="35" fill="#52b788" opacity="0.7" />
+            <circle cx="180" cy="70" r="35" fill="#52b788" opacity="0.7" />
+            <circle cx="90" cy="95" r="28" fill="#2d6a4f" opacity="0.75" />
+            <circle cx="210" cy="95" r="28" fill="#2d6a4f" opacity="0.75" />
+            <circle cx="150" cy="55" r="25" fill="#52b788" opacity="0.8" />
+
+            <!-- Roots -->
+            <path
+              d="M 140 250 Q 120 270 110 280"
+              stroke="#8b6f47"
+              stroke-width="2"
+              fill="none"
+              opacity="0.6"
+            />
+            <path
+              d="M 160 250 Q 180 270 190 280"
+              stroke="#8b6f47"
+              stroke-width="2"
+              fill="none"
+              opacity="0.6"
+            />
+
+            <!-- Buddha figure -->
+            <!-- Head -->
+            <circle cx="150" cy="160" r="18" fill="#d4a574" opacity="0.9" />
+
+            <!-- Face glow -->
+            <circle
+              cx="150"
+              cy="160"
+              r="20"
+              fill="none"
+              stroke="#f5a94e"
+              stroke-width="1"
+              opacity="0.4"
+            />
+
+            <!-- Eyes (closed in meditation) -->
+            <line
+              x1="145"
+              y1="158"
+              x2="147"
+              y2="158"
+              stroke="#8b6f47"
+              stroke-width="1.5"
+            />
+            <line
+              x1="153"
+              y1="158"
+              x2="155"
+              y2="158"
+              stroke="#8b6f47"
+              stroke-width="1.5"
+            />
+
+            <!-- Serene expression mark -->
+            <path
+              d="M 150 165 Q 148 167 150 168 Q 152 167 150 165"
+              fill="#8b6f47"
+              opacity="0.6"
+            />
+
+            <!-- Body (meditation pose) -->
+            <ellipse
+              cx="150"
+              cy="190"
+              rx="20"
+              ry="28"
+              fill="#d4a574"
+              opacity="0.85"
+            />
+
+            <!-- Robes -->
+            <path
+              d="M 130 185 Q 125 210 128 240"
+              stroke="#9b6f30"
+              stroke-width="3"
+              fill="none"
+              opacity="0.7"
+            />
+            <path
+              d="M 170 185 Q 175 210 172 240"
+              stroke="#9b6f30"
+              stroke-width="3"
+              fill="none"
+              opacity="0.7"
+            />
+
+            <!-- Legs (crossed) -->
+            <ellipse
+              cx="145"
+              cy="235"
+              rx="8"
+              ry="12"
+              fill="#d4a574"
+              opacity="0.8"
+            />
+            <ellipse
+              cx="155"
+              cy="235"
+              rx="8"
+              ry="12"
+              fill="#d4a574"
+              opacity="0.8"
+            />
+
+            <!-- Arms -->
+            <path
+              d="M 130 188 Q 120 200 118 220"
+              stroke="#d4a574"
+              stroke-width="6"
+              fill="none"
+              opacity="0.8"
+            />
+            <path
+              d="M 170 188 Q 180 200 182 220"
+              stroke="#d4a574"
+              stroke-width="6"
+              fill="none"
+              opacity="0.8"
+            />
+
+            <!-- Aura/Halo -->
+            <circle
+              cx="150"
+              cy="160"
+              r="35"
+              fill="none"
+              stroke="#f5a94e"
+              stroke-width="1.5"
+              opacity="0.3"
+              stroke-dasharray="5,5"
+            />
+
+            <!-- Sacred OM symbol above -->
+            <!-- Glow effect -->
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </svg>
+
+         
+
+    <!-- FOOTER -->
+    <div class="page-flag-strip bottom"></div>
+    <footer>
+      <div class="footer-name">Rishav Jha</div>
+      <div class="footer-text">
+        Built with ❤️ · From the foot of the Himalayas to the cloud · नमस्ते 🏔️
       </div>
     </footer>
 
-    <script src="app.js">
-      const navToggle = document.querySelector('.nav-toggle');
-  const navMenu = document.querySelector('.nav-menu');
+    <!-- EASTER EGG -->
+    <button class="code-hint" id="codeHint"><span>$</span> terminal</button>
+    <div class="easter-panel" id="easterPanel">
+      <div class="easter-bar">
+        <span>rishav@himalaya:~</span>
+        <button class="easter-close" id="easterClose">✕</button>
+      </div>
+      <div class="easter-body" id="easterBody">
+        <div class="e-out">
+          <span class="e-y">🏔️ Welcome to the Himalayan Terminal</span>
+        </div>
+        <div class="e-out">
+          <span class="e-r">Commands: </span
+          ><span class="e-w"
+            >help, whoami, joke, mountain, skills, hire, nepal, buddha</span
+          >
+        </div>
+      </div>
+      <div class="easter-input-row">
+        <span class="e-prompt">rishav@himalaya:~$</span>
+        <input
+          class="e-input"
+          id="easterInput"
+          placeholder="type a command..."
+          autocomplete="off"
+        />
+      </div>
+    </div>
 
-  navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('open');
-  });
-    </script>
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a
+      href="https://wa.me/918658567949"
+      class="whatsapp-float"
+      target="_blank"
+      title="Chat on WhatsApp"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+        />
+      </svg>
+      <span class="whatsapp-float-label">Chat Now</span>
+    </a>
+
+    <!-- NEPALI DECORATIVE MANDALAS -->
+    <div class="nepali-deco-left" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="80" height="80" opacity="0.07">
+        <circle
+          cx="60"
+          cy="60"
+          r="55"
+          fill="none"
+          stroke="#d4a017"
+          stroke-width="1"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r="40"
+          fill="none"
+          stroke="#d4a017"
+          stroke-width="0.5"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r="25"
+          fill="none"
+          stroke="#e8820c"
+          stroke-width="1"
+        />
+        <circle cx="60" cy="60" r="10" fill="rgba(212,160,23,0.3)" />
+        <line
+          x1="60"
+          y1="5"
+          x2="60"
+          y2="115"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+        <line
+          x1="5"
+          y1="60"
+          x2="115"
+          y2="60"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+        <line
+          x1="21"
+          y1="21"
+          x2="99"
+          y2="99"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+        <line
+          x1="99"
+          y1="21"
+          x2="21"
+          y2="99"
+          stroke="#d4a017"
+          stroke-width="0.3"
+        />
+      </svg>
+    </div>
+    <div class="nepali-deco-right" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="80" height="80" opacity="0.07">
+        <circle
+          cx="60"
+          cy="60"
+          r="55"
+          fill="none"
+          stroke="#9b1b30"
+          stroke-width="1"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r="40"
+          fill="none"
+          stroke="#9b1b30"
+          stroke-width="0.5"
+        />
+        <text
+          x="60"
+          y="65"
+          text-anchor="middle"
+          fill="#9b1b30"
+          font-size="12"
+          font-family="serif"
+        >
+          ☸
+        </text>
+      </svg>
+    </div>
+
+    <canvas
+      id="globalSnowCanvas"
+      style="
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 998;
+        opacity: 0.55;
+      "
+    ></canvas>
+    <script src="script.js"></script>
   </body>
 </html>
